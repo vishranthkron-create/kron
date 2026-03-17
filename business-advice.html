@@ -1,0 +1,3119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>LIX Strategy Studio — Your Life. Your Strategy. Your Book.</title>
+<meta name="description" content="We transform your experiences, ambitions, and knowledge into a professionally written custom strategy book designed exclusively for you."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ══ KRON NAVBAR v4 ══════════════════════════════════ */
+
+/* ── TOKENS ──────────────────────────────────────────────── */
+:root{
+  --nh:64px;
+  --ink:#030c1e; --deep:#07142e;
+  --sky:#4a90d9; --ice:#93c5fd; --frost:#bae6ff;
+  --gold:#c9a84c; --goldlt:#e8d5a3;
+  --w:#fff; --w8:rgba(255,255,255,.08);
+  --w15:rgba(255,255,255,.15); --w40:rgba(255,255,255,.4);
+  --w65:rgba(255,255,255,.65);
+  --s10:rgba(74,144,217,.10); --s25:rgba(74,144,217,.25);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{padding-top:var(--nh)!important}
+
+/* ── NAV SHELL ───────────────────────────────────────────── */
+#KN{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  height:var(--nh);
+  transform:translateY(0);
+  transition:transform .45s var(--ease), box-shadow .4s ease, height .4s var(--ease);
+}
+#KN.kn-hidden{transform:translateY(-110%)}
+
+#KN::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(110deg,#030a1a 0%,#081840 35%,#0b2050 65%,#030c1e 100%);
+  transition:background .5s ease;
+}
+#KN::after{
+  content:'';position:absolute;inset:0;
+  backdrop-filter:blur(26px) saturate(1.7);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7);
+  border-bottom:1px solid rgba(74,144,217,.18);
+}
+#KN.scrolled{box-shadow:0 6px 48px rgba(0,0,0,.55)}
+#KN.scrolled::before{background:linear-gradient(110deg,#020810 0%,#06112a 50%,#020810 100%)}
+
+#KN-line{
+  position:absolute;bottom:0;left:0;right:0;height:1px;z-index:10;
+  background:linear-gradient(90deg,transparent,rgba(147,210,255,.6) 40%,rgba(201,168,76,.8) 50%,rgba(147,210,255,.6) 60%,transparent);
+  background-size:300% 100%;animation:lShim 5s linear infinite;
+}
+@keyframes lShim{0%{background-position:-300% 0}100%{background-position:300% 0}}
+
+/* ── ROW ─────────────────────────────────────────────────── */
+#KN-row{
+  position:relative;z-index:6;
+  max-width:1300px;margin:0 auto;height:100%;
+  padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+
+/* ── LOGO ────────────────────────────────────────────────── */
+.kn-logo{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;flex-shrink:0;
+  animation:slideL .8s var(--ease) both;
+}
+@keyframes slideL{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:translateX(0)}}
+
+.kn-orb{position:relative;width:42px;height:42px;flex-shrink:0;}
+.kn-orb::before{
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  background:conic-gradient(from 0deg,
+    transparent 0deg,rgba(147,210,255,.7) 72deg,
+    rgba(186,230,255,.9) 144deg,transparent 216deg,
+    rgba(100,180,255,.5) 288deg,transparent 360deg);
+  animation:aura 6s linear infinite;filter:blur(2.5px);
+}
+@keyframes aura{to{transform:rotate(360deg)}}
+.kn-orb::after{
+  content:'';position:absolute;inset:3px;border-radius:50%;
+  background:radial-gradient(circle at 36% 32%,rgba(186,230,255,.2),transparent 70%);
+  animation:breathe 3s ease-in-out infinite alternate;
+}
+@keyframes breathe{from{opacity:.5;transform:scale(.94)}to{opacity:1;transform:scale(1.06)}}
+.kn-orb svg{
+  position:relative;z-index:2;width:100%;height:100%;
+  filter:drop-shadow(0 0 5px rgba(147,210,255,.95)) drop-shadow(0 0 14px rgba(100,180,255,.55)) drop-shadow(0 0 28px rgba(74,144,217,.3));
+  transition:filter .4s ease,transform .45s var(--spring);
+}
+.kn-logo:hover .kn-orb svg{
+  filter:drop-shadow(0 0 8px rgba(186,230,255,1)) drop-shadow(0 0 22px rgba(147,210,255,.85)) drop-shadow(0 0 44px rgba(74,144,217,.55));
+  transform:scale(1.08) rotate(6deg);
+}
+.kn-words{display:flex;flex-direction:column;line-height:1;gap:4px}
+.kn-name{
+  font-family:'Cinzel',serif;font-size:19px;font-weight:700;
+  letter-spacing:.26em;text-transform:uppercase;
+  background:linear-gradient(120deg,#e0f4ff 0%,#93c5fd 30%,#bae6ff 60%,#7dd3fc 80%,#dff1ff 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:nameGlow 4s linear infinite;
+}
+@keyframes nameGlow{0%{background-position:0% 0}100%{background-position:220% 0}}
+.kn-tag{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:8.5px;font-weight:300;letter-spacing:.55em;
+  color:rgba(186,230,255,.6);text-transform:uppercase;
+}
+
+/* ── TOGGLE BUTTON — single for all devices ──────────────── */
+.kn-burger{
+  position:relative;
+  width:46px;height:46px;border-radius:14px;
+  border:1px solid rgba(147,210,255,.25);
+  background:linear-gradient(135deg,rgba(147,210,255,.1),rgba(74,144,217,.05));
+  cursor:pointer;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+  overflow:hidden;
+  animation:slideR .6s var(--ease) .3s both;
+  transition:border-color .25s,background .25s,transform .18s,box-shadow .25s;
+}
+@keyframes slideR{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+.kn-burger::before{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(147,210,255,.22),transparent);
+  transition:left .4s ease;
+}
+.kn-burger:hover::before{left:140%}
+.kn-burger:hover{
+  border-color:rgba(147,210,255,.6);
+  background:linear-gradient(135deg,rgba(147,210,255,.18),rgba(74,144,217,.12));
+  transform:scale(1.05);
+  box-shadow:0 0 18px rgba(147,210,255,.2);
+}
+.kn-burger:active{transform:scale(.96)}
+.kn-burger span{
+  display:block;border-radius:2px;
+  background:linear-gradient(90deg,#bae6ff,#7dd3fc);
+  transition:transform .38s var(--spring),opacity .28s ease,width .3s var(--ease);
+  will-change:transform;
+}
+.kn-burger span:nth-child(1){width:22px;height:1.8px}
+.kn-burger span:nth-child(2){width:15px;height:1.8px;opacity:.65}
+.kn-burger span:nth-child(3){width:22px;height:1.8px}
+.kn-burger.open span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
+.kn-burger.open span:nth-child(2){opacity:0;width:0}
+.kn-burger.open span:nth-child(3){transform:translateY(-6.8px) rotate(-45deg)}
+.kn-burger.open{
+  border-color:rgba(147,210,255,.7);
+  background:linear-gradient(135deg,rgba(147,210,255,.22),rgba(74,144,217,.16));
+  box-shadow:0 0 20px rgba(147,210,255,.35),inset 0 0 10px rgba(147,210,255,.07);
+}
+
+/* ── CURSOR GLOW (PC only) ───────────────────────────────── */
+#KN-glow{
+  position:absolute;pointer-events:none;z-index:2;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(74,144,217,.18) 0%,transparent 70%);
+  transform:translate(-50%,-50%);opacity:0;transition:opacity .3s ease;
+}
+
+/* ── CANVAS (particle field) ─────────────────────────────── */
+#KN-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
+
+/* ── BACKDROP ────────────────────────────────────────────── */
+#KN-backdrop{
+  display:none;position:fixed;inset:0;z-index:9997;
+  background:rgba(2,6,16,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+#KN-backdrop.open{display:block;opacity:1;pointer-events:all}
+
+/* ── DRAWER ──────────────────────────────────────────────── */
+#KN-drawer{
+  position:fixed;top:var(--nh,64px);right:0;
+  width:min(360px,95vw);z-index:9998;
+  height:calc(100vh - var(--nh,64px));height:calc(100dvh - var(--nh,64px));
+  background:linear-gradient(168deg,#04091e 0%,#080f28 30%,#091b42 60%,#060e22 100%);
+  border-left:1px solid rgba(147,210,255,.14);
+  box-shadow:-20px 0 80px rgba(0,0,0,.6);
+  transform:translateX(110%);transition:transform .52s var(--ease);
+  overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;
+  scrollbar-width:thin;scrollbar-color:rgba(74,144,217,.2) transparent;
+}
+#KN-drawer::-webkit-scrollbar{width:3px}
+#KN-drawer::-webkit-scrollbar-thumb{background:rgba(74,144,217,.2);border-radius:3px}
+#KN-drawer.open{transform:translateX(0)}
+
+/* drawer shimmer line */
+#KN-drawer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(147,210,255,.6),rgba(201,168,76,.5),rgba(147,210,255,.6),transparent);
+  background-size:300% 100%;animation:lShim 4s linear infinite;
+}
+
+/* ── DRAWER HEAD ─────────────────────────────────────────── */
+.knd-head{
+  padding:28px 24px 22px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.knd-mini-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.knd-mini-mark{
+  width:36px;height:36px;flex-shrink:0;
+  filter:drop-shadow(0 0 7px rgba(147,210,255,.85)) drop-shadow(0 0 18px rgba(74,144,217,.45));
+}
+.knd-mini-mark svg{width:100%;height:100%}
+.knd-mini-name{
+  font-family:'Cinzel',serif;font-size:16px;font-weight:700;letter-spacing:.22em;
+  background:linear-gradient(120deg,#e0f4ff,#93c5fd,#bae6ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.knd-mini-tag{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:9px;font-weight:300;letter-spacing:.45em;
+  color:rgba(186,230,255,.55);margin-top:3px;
+}
+/* close X inside drawer */
+.knd-close{
+  width:38px;height:38px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.45);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+  transition:border-color .22s,color .22s,background .22s;
+}
+.knd-close:hover{border-color:rgba(147,210,255,.4);color:#93c5fd;background:rgba(147,210,255,.08)}
+.knd-close svg{width:16px;height:16px}
+
+/* ── DRAWER NAV ──────────────────────────────────────────── */
+.knd-nav{padding:18px 16px 8px;display:flex;flex-direction:column;gap:4px;flex:1}
+.knd-link{
+  display:flex;align-items:center;
+  padding:14px 16px;border-radius:14px;
+  text-decoration:none;border:1px solid transparent;
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateX(36px);
+  transition:opacity .38s var(--ease),transform .38s var(--ease),background .22s ease,border-color .22s ease;
+}
+#KN-drawer.open .knd-link{opacity:1;transform:translateX(0)}
+#KN-drawer.open .knd-link:nth-child(1){transition-delay:.08s}
+#KN-drawer.open .knd-link:nth-child(2){transition-delay:.13s}
+#KN-drawer.open .knd-link:nth-child(3){transition-delay:.18s}
+#KN-drawer.open .knd-link:nth-child(4){transition-delay:.23s}
+.knd-link::before{
+  content:'';position:absolute;left:0;top:10px;bottom:10px;
+  width:2.5px;border-radius:2px;
+  background:linear-gradient(180deg,#bae6ff,var(--sky));
+  transform:scaleY(0);transform-origin:center;
+  transition:transform .28s var(--spring);
+}
+.knd-link:hover,.knd-link.active{background:rgba(74,144,217,.09);border-color:rgba(74,144,217,.24)}
+.knd-link:hover::before,.knd-link.active::before{transform:scaleY(1)}
+
+.knd-icon-box{
+  width:40px;height:40px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;margin-right:14px;
+  transition:background .22s,border-color .22s,transform .28s var(--spring);
+}
+.knd-link:hover .knd-icon-box{background:rgba(147,210,255,.13);border-color:rgba(147,210,255,.32);transform:scale(1.07)}
+.knd-icon-box svg{width:17px;height:17px;color:#93c5fd}
+
+.knd-text{flex:1;min-width:0}
+.knd-title{
+  font-family:'Inter',sans-serif;font-size:14.5px;font-weight:500;
+  letter-spacing:.02em;color:rgba(255,255,255,.7);display:block;
+  transition:color .2s ease;
+}
+.knd-desc{
+  font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:300;
+  letter-spacing:.04em;color:rgba(255,255,255,.32);display:block;margin-top:2px;
+  transition:color .2s ease;
+}
+.knd-link:hover .knd-title,.knd-link.active .knd-title{color:var(--w)}
+.knd-link:hover .knd-desc,.knd-link.active .knd-desc{color:rgba(255,255,255,.58)}
+.knd-arrow{font-size:20px;color:rgba(255,255,255,.18);flex-shrink:0;transition:color .2s,transform .25s var(--spring)}
+.knd-link:hover .knd-arrow{color:rgba(147,210,255,.7);transform:translateX(5px)}
+
+/* ── DRAWER CTA ──────────────────────────────────────────── */
+.knd-cta{
+  margin:8px 16px 20px;padding:24px 22px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(147,210,255,.09),rgba(74,144,217,.07));
+  border:1px solid rgba(147,210,255,.17);text-align:center;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .38s var(--ease) .3s,transform .38s var(--ease) .3s;
+  flex-shrink:0;
+}
+#KN-drawer.open .knd-cta{opacity:1;transform:translateY(0)}
+.knd-cta-eyebrow{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:10.5px;letter-spacing:.32em;color:var(--gold);display:block;margin-bottom:5px;
+}
+.knd-cta-title{
+  font-family:'Cinzel',serif;font-size:17px;font-weight:700;
+  letter-spacing:.06em;color:var(--w);display:block;margin-bottom:15px;
+}
+.knd-cta-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 28px;border-radius:100px;
+  font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  background:linear-gradient(135deg,var(--goldlt),var(--gold));
+  box-shadow:0 4px 22px rgba(201,168,76,.3);
+  transition:box-shadow .25s,transform .18s;
+}
+.knd-cta-btn:hover{box-shadow:0 6px 30px rgba(201,168,76,.52);transform:translateY(-1px)}
+
+/* ── DRAWER FOOTER ───────────────────────────────────────── */
+.knd-foot{
+  padding:16px 22px 28px;border-top:1px solid rgba(255,255,255,.05);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  flex-shrink:0;
+  opacity:0;transition:opacity .38s var(--ease) .36s;
+}
+#KN-drawer.open .knd-foot{opacity:1}
+.knd-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;color:rgba(255,255,255,.28);letter-spacing:.06em;text-align:center}
+.knd-socials{display:flex;gap:10px}
+.knd-soc{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.35);text-decoration:none;
+  transition:border-color .22s,color .22s,background .22s,transform .2s var(--spring);
+}
+.knd-soc:hover{border-color:rgba(147,210,255,.4);color:#93c5fd;background:rgba(147,210,255,.09);transform:scale(1.08)}
+.knd-soc svg{width:15px;height:15px}
+
+/* ── RESPONSIVE ADJUSTMENTS ──────────────────────────────── */
+@media(max-width:480px){
+  #KN-row{padding:0 16px;gap:10px}
+  .kn-orb{width:36px;height:36px}
+  .kn-name{font-size:16px;letter-spacing:.2em}
+  .kn-tag{font-size:7.5px;letter-spacing:.4em}
+}
+@media(max-width:360px){
+  .kn-tag{display:none}
+  .kn-name{font-size:14.5px}
+}
+
+/* ══ LIX STRATEGY STUDIO ══════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   LIX STRATEGY STUDIO — SITE TOKENS & RESET
+═══════════════════════════════════════════ */
+:root{
+  --deep:#020912;
+  --navy:#060e1e;
+  --navy2:#0b1830;
+  --navy3:#102040;
+  --blue:#3a7bd5;
+  --sky:#5ba3f5;
+  --ice:#8ecaff;
+  --gold:#c9a84c;
+  --goldlt:#e8d5a3;
+  --w:#ffffff;
+  --w80:rgba(255,255,255,.8);
+  --w50:rgba(255,255,255,.5);
+  --w20:rgba(255,255,255,.2);
+  --w10:rgba(255,255,255,.1);
+  --w06:rgba(255,255,255,.06);
+  --b20:rgba(58,123,213,.2);
+  --b40:rgba(58,123,213,.4);
+  --ff:'Cormorant Garamond',serif;
+  --ffc:'Cormorant SC',serif;
+  --ffi:'Inter',sans-serif;
+  --ffz:'Cinzel',serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--deep);
+  color:var(--w);
+  font-family:var(--ffi);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:none;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--navy)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+a{text-decoration:none;color:inherit}
+button{cursor:none;font-family:inherit}
+img{display:block;width:100%}
+h1,h2,h3,h4{font-family:var(--ff)}
+
+/* ── CUSTOM CURSOR ──────────────────────────── */
+#lix-cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--sky);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,background .25s;
+  mix-blend-mode:difference;
+}
+#lix-cursor-ring{
+  position:fixed;width:38px;height:38px;
+  border:1.5px solid rgba(90,163,245,.5);border-radius:50%;
+  pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:width .3s var(--ease),height .3s var(--ease),opacity .3s;
+}
+#lix-cursor-glow{
+  position:fixed;width:350px;height:350px;
+  background:radial-gradient(circle,rgba(58,123,213,.07) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;z-index:0;
+  transform:translate(-50%,-50%);transition:all .4s ease;
+}
+body.cursor-hover #lix-cursor{width:20px;height:20px}
+body.cursor-hover #lix-cursor-ring{width:60px;height:60px;opacity:.3}
+
+/* ── SCROLL PROGRESS ────────────────────────── */
+#lix-prog{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--sky),var(--ice));
+  z-index:10002;box-shadow:0 0 10px var(--sky);
+  transition:width .08s linear;
+}
+
+/* ── BACKGROUND CANVAS ──────────────────────── */
+#lix-bg-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:.6;
+}
+
+/* ── LIGHT BEAMS ────────────────────────────── */
+.lix-beam{
+  position:fixed;pointer-events:none;z-index:0;
+  width:2px;height:100vh;opacity:.04;
+  background:linear-gradient(180deg,transparent,var(--sky),transparent);
+  animation:beamDrift 20s ease-in-out infinite;
+}
+.lix-beam:nth-child(1){left:15%;animation-delay:0s;}
+.lix-beam:nth-child(2){left:45%;animation-delay:7s;width:1px;opacity:.03}
+.lix-beam:nth-child(3){left:75%;animation-delay:13s;opacity:.025}
+@keyframes beamDrift{
+  0%,100%{transform:scaleX(1) translateX(0)}
+  50%{transform:scaleX(1.5) translateX(20px)}
+}
+/* Scan beam sweep */
+.lix-scan{
+  position:fixed;top:0;left:-100%;
+  width:40%;height:100vh;pointer-events:none;z-index:0;
+  background:linear-gradient(90deg,transparent,rgba(90,163,245,.025),transparent);
+  animation:scanBeam 12s ease-in-out infinite;
+}
+@keyframes scanBeam{0%{left:-40%}80%,100%{left:130%}}
+
+/* ── SHARED SECTION STYLES ──────────────────── */
+section{position:relative;z-index:1}
+.container{max-width:1140px;margin:0 auto;padding:0 32px}
+.section-pad{padding:130px 0}
+.section-label{
+  font-family:var(--ffz);font-size:.68rem;font-weight:400;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:18px;
+}
+.section-label::before,.section-label::after{
+  content:'';width:24px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.section-label::after{background:linear-gradient(90deg,var(--gold),transparent)}
+
+.section-title{
+  font-family:var(--ff);
+  font-size:clamp(2.4rem,5vw,4.2rem);
+  font-weight:600;line-height:1.12;
+  letter-spacing:-.02em;
+  color:var(--w);
+  margin-bottom:20px;
+}
+.section-title em{
+  font-style:italic;font-weight:300;
+  color:var(--ice);
+}
+.section-sub{
+  font-size:1rem;line-height:1.85;
+  color:var(--w50);font-weight:300;
+  max-width:520px;
+}
+
+/* ── REVEAL SYSTEM ──────────────────────────── */
+.rv{opacity:0;transform:translateY(44px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv.vis{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-44px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv-l.vis{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(44px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv-r.vis{opacity:1;transform:none}
+.rv-sc{opacity:0;transform:scale(.92);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);}
+.rv-sc.vis{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* ── GLOWING BORDER ─────────────────────────── */
+@keyframes glowBorder{
+  0%,100%{box-shadow:0 0 0 1px rgba(58,123,213,.3),0 0 20px rgba(58,123,213,.1)}
+  50%{box-shadow:0 0 0 1px rgba(90,163,245,.6),0 0 40px rgba(90,163,245,.2)}
+}
+
+/* ══════════════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:140px 0 100px;overflow:hidden;position:relative;
+}
+#hero-canvas{position:absolute;inset:0;pointer-events:none;z-index:1}
+.hero-morphs{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.hero-morph{
+  position:absolute;border-radius:50%;filter:blur(100px);
+  animation:morphFloat 12s ease-in-out infinite;
+  opacity:.12;
+}
+.hm1{width:700px;height:700px;
+  background:radial-gradient(circle,#1a4a8a,transparent);
+  top:-200px;right:-100px;animation-delay:0s}
+.hm2{width:500px;height:500px;
+  background:radial-gradient(circle,#3a7bd5,transparent);
+  bottom:-100px;left:-100px;animation-delay:4s}
+.hm3{width:300px;height:300px;
+  background:radial-gradient(circle,#c9a84c,transparent);
+  top:40%;left:40%;animation-delay:8s;opacity:.06}
+@keyframes morphFloat{
+  0%,100%{transform:scale(1) translate(0,0)}
+  33%{transform:scale(1.15) translate(30px,-20px)}
+  66%{transform:scale(.9) translate(-20px,30px)}
+}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;position:relative;z-index:2;
+}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;text-align:center}}
+
+/* Hero text side */
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(58,123,213,.1);
+  border:1px solid rgba(58,123,213,.25);
+  border-radius:100px;padding:7px 20px;
+  font-family:var(--ffz);font-size:.6rem;font-weight:400;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--sky);
+  margin-bottom:28px;position:relative;overflow:hidden;
+}
+.hero-eyebrow::before{
+  content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(90,163,245,.15),transparent);
+  animation:eyebrowShim 4s ease-in-out infinite;
+}
+@keyframes eyebrowShim{0%{left:-80%}100%{left:130%}}
+.ey-pulse{
+  width:6px;height:6px;background:var(--sky);border-radius:50%;
+  box-shadow:0 0 0 0 rgba(90,163,245,.5);
+  animation:eyPulse 2s ease-in-out infinite;
+}
+@keyframes eyPulse{70%{box-shadow:0 0 0 8px rgba(90,163,245,0)}}
+
+.hero-h1{
+  font-family:var(--ff);font-size:clamp(3.2rem,7vw,6.5rem);
+  font-weight:600;line-height:1.06;letter-spacing:-.03em;
+  color:var(--w);margin-bottom:28px;
+}
+.hero-h1 .hl1,.hero-h1 .hl2,.hero-h1 .hl3{
+  display:block;overflow:hidden;
+}
+.hero-h1 .hw{
+  display:inline-block;
+  opacity:0;transform:translateY(110%);
+  animation:hwIn .9s var(--ease) both;
+}
+.hero-h1 .hblue{
+  color:var(--ice);
+  text-shadow:0 0 60px rgba(90,163,245,.4);
+}
+.hero-h1 .hgold{
+  font-style:italic;font-weight:300;color:var(--goldlt);
+}
+@keyframes hwIn{to{opacity:1;transform:translateY(0)}}
+
+.hero-sub{
+  font-size:1.05rem;line-height:1.85;color:var(--w50);
+  max-width:480px;margin-bottom:44px;font-weight:300;
+  opacity:0;animation:fadeSlideUp .8s var(--ease) 1.3s both;
+}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.hero-btns{
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+  opacity:0;animation:fadeSlideUp .8s var(--ease) 1.5s both;
+}
+@media(max-width:900px){.hero-btns{justify-content:center}}
+
+/* Primary CTA */
+.btn-lix{
+  position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 38px;border-radius:100px;
+  font-family:var(--ffi);font-size:.88rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  border:none;cursor:none;
+  transition:transform .25s var(--ease),box-shadow .25s ease;
+}
+.btn-lix-primary{
+  background:linear-gradient(135deg,var(--blue) 0%,#1a5cb8 100%);
+  color:var(--w);
+  box-shadow:0 8px 32px rgba(58,123,213,.4),0 0 0 1px rgba(58,123,213,.3);
+}
+.btn-lix-primary:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 18px 48px rgba(58,123,213,.55),0 0 0 1px rgba(90,163,245,.5);
+}
+.btn-shimmer{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);
+  transform:translateX(-100%);
+  animation:btnShim 3.5s ease-in-out infinite;
+}
+@keyframes btnShim{0%{transform:translateX(-100%)}70%,100%{transform:translateX(200%)}}
+.btn-arrow{
+  display:inline-block;
+  transition:transform .25s var(--spring);
+}
+.btn-lix:hover .btn-arrow{transform:translateX(6px)}
+.btn-lix-ghost{
+  background:transparent;color:var(--w80);
+  border:1px solid rgba(255,255,255,.2);
+}
+.btn-lix-ghost:hover{
+  background:rgba(255,255,255,.06);
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.35);
+}
+/* Ripple */
+.btn-ripple{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.25);
+  transform:scale(0);animation:ripOut .6s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes ripOut{to{transform:scale(4);opacity:0}}
+
+/* ── HERO BOOK (3D CSS) ─────────────────────── */
+.hero-book-wrap{
+  display:flex;justify-content:center;align-items:center;
+  opacity:0;animation:fadeSlideUp .9s var(--ease) 1.7s both;
+}
+.book-scene{
+  width:260px;height:360px;
+  perspective:1400px;perspective-origin:50% 45%;
+}
+.book-3d{
+  width:260px;height:360px;
+  position:relative;transform-style:preserve-3d;
+  animation:bookFloat 10s ease-in-out infinite;
+}
+@keyframes bookFloat{
+  0%,100%{transform:rotateY(-28deg) rotateX(6deg) translateY(0)}
+  50%{transform:rotateY(-14deg) rotateX(3deg) translateY(-18px)}
+}
+/* Faces */
+.bf{position:absolute;backface-visibility:hidden}
+.bf-front{
+  width:260px;height:360px;
+  transform:translateZ(22px);
+  background:linear-gradient(145deg,#0d2045 0%,#1a3a6e 40%,#0f2c5a 70%,#081b38 100%);
+  border-radius:3px 14px 14px 3px;
+  box-shadow:0 25px 80px rgba(0,0,0,.7),4px 0 20px rgba(0,0,0,.4);
+  overflow:hidden;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:28px 24px;
+}
+/* Cover design elements */
+.bc-glow{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 30% 20%,rgba(90,163,245,.12) 0%,transparent 60%);
+  animation:coverGlow 5s ease-in-out infinite;
+}
+@keyframes coverGlow{
+  0%,100%{opacity:.7}50%{opacity:1}
+}
+.bc-lines{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden}
+.bc-lines::before{
+  content:'';position:absolute;
+  inset:-50%;
+  background:repeating-linear-gradient(
+    -45deg,
+    transparent 0,transparent 18px,
+    rgba(90,163,245,.04) 18px,rgba(90,163,245,.04) 19px
+  );
+  animation:linesDrift 25s linear infinite;
+}
+@keyframes linesDrift{to{transform:translate(50px,50px)}}
+.bc-logo{
+  font-family:var(--ffz);font-size:2.6rem;font-weight:700;
+  letter-spacing:.25em;
+  background:linear-gradient(135deg,var(--goldlt),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(201,168,76,.5));
+  position:relative;z-index:1;
+  animation:logoGlow 4s ease-in-out infinite alternate;
+}
+@keyframes logoGlow{
+  from{filter:drop-shadow(0 0 8px rgba(201,168,76,.4))}
+  to{filter:drop-shadow(0 0 20px rgba(201,168,76,.8)) drop-shadow(0 0 40px rgba(201,168,76,.3))}
+}
+.bc-divider{
+  width:60px;height:1px;margin:12px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.bc-title{
+  font-family:var(--ff);font-size:1rem;font-weight:400;
+  font-style:italic;letter-spacing:.12em;color:rgba(255,255,255,.7);
+  text-align:center;position:relative;z-index:1;margin-bottom:8px;
+}
+.bc-subtitle{
+  font-family:var(--ffz);font-size:.52rem;letter-spacing:.35em;
+  text-transform:uppercase;color:rgba(255,255,255,.3);
+  position:relative;z-index:1;
+}
+.bc-emboss{
+  position:absolute;bottom:20px;right:20px;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(201,168,76,.3);
+  display:flex;align-items:center;justify-content:center;
+}
+.bc-emboss::after{
+  content:'✦';color:rgba(201,168,76,.5);font-size:.65rem;
+}
+/* Shimmer stripe on cover */
+.bc-shine{
+  position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.06),transparent);
+  animation:coverShine 6s ease-in-out infinite 2s;
+}
+@keyframes coverShine{0%{left:-80%}40%,100%{left:130%}}
+
+.bf-back{
+  width:260px;height:360px;
+  transform:rotateY(180deg) translateZ(22px);
+  background:linear-gradient(145deg,#06152a,#0d2040);
+  border-radius:14px 3px 3px 14px;
+}
+.bf-spine{
+  width:44px;height:360px;left:-22px;
+  transform:rotateY(-90deg) translateZ(152px);
+  background:linear-gradient(90deg,#060f22 0%,#0d1f3e 50%,#060f22 100%);
+  border-radius:4px 0 0 4px;overflow:hidden;
+}
+.bf-spine::after{
+  content:'LIX';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-90deg);
+  font-family:var(--ffz);font-size:.65rem;letter-spacing:.3em;
+  color:rgba(201,168,76,.45);white-space:nowrap;
+}
+.bf-pages{
+  width:44px;height:360px;right:-22px;
+  transform:rotateY(90deg) translateZ(108px);
+  background:repeating-linear-gradient(
+    180deg,
+    #e8e8e2 0px,#e8e8e2 1px,
+    #d8d8d2 1px,#d8d8d2 2px
+  );
+  box-shadow:inset -3px 0 8px rgba(0,0,0,.2);
+}
+.bf-top{
+  width:260px;height:44px;top:-22px;
+  transform:rotateX(-90deg) translateZ(202px);
+  background:linear-gradient(180deg,#0e2040,#1a3a6e);
+}
+.bf-bottom{
+  width:260px;height:44px;bottom:-22px;
+  transform:rotateX(90deg) translateZ(158px);
+  background:linear-gradient(180deg,#0a1830,#0e2040);
+}
+/* Book platform shadow */
+.book-shadow{
+  width:220px;height:30px;
+  background:radial-gradient(ellipse,rgba(58,123,213,.35) 0%,transparent 70%);
+  border-radius:50%;
+  position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);
+  animation:shadowPulse 10s ease-in-out infinite;
+  filter:blur(8px);
+}
+@keyframes shadowPulse{
+  0%,100%{transform:translateX(-50%) scaleX(1);opacity:.5}
+  50%{transform:translateX(-50%) scaleX(.85);opacity:.3}
+}
+
+/* Hero stats row */
+.hero-stats{
+  display:flex;gap:40px;margin-top:56px;
+  flex-wrap:wrap;
+  opacity:0;animation:fadeSlideUp .8s var(--ease) 1.9s both;
+}
+@media(max-width:900px){.hero-stats{justify-content:center}}
+.hstat{border-left:1px solid rgba(255,255,255,.1);padding-left:20px}
+.hstat-n{
+  font-family:var(--ff);font-size:2.2rem;font-weight:600;
+  background:linear-gradient(135deg,var(--w),var(--ice));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;
+}
+.hstat-l{font-size:.7rem;color:var(--w50);letter-spacing:.1em;margin-top:4px;text-transform:uppercase}
+
+/* ── SCROLL CUE ─────────────────────────────── */
+.hero-scroll-cue{
+  position:absolute;bottom:40px;left:50%;
+  transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeSlideUp .8s var(--ease) 2.2s both;
+}
+.hsc-line{
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,transparent,rgba(90,163,245,.5));
+  animation:lineDrop 2s ease-in-out infinite;
+}
+@keyframes lineDrop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+.hsc-txt{font-size:.58rem;letter-spacing:.3em;color:var(--w50);text-transform:uppercase}
+
+/* ══════════════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════════════ */
+.lix-marquee{
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  overflow:hidden;padding:18px 0;position:relative;z-index:1;
+}
+.lix-marquee::before,.lix-marquee::after{
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;
+}
+.lix-marquee::before{left:0;background:linear-gradient(90deg,var(--deep),transparent)}
+.lix-marquee::after{right:0;background:linear-gradient(-90deg,var(--deep),transparent)}
+.marquee-t{display:flex;gap:0;animation:mScroll 30s linear infinite;width:max-content}
+.marquee-t:hover{animation-play-state:paused}
+.mi{
+  display:inline-flex;align-items:center;gap:16px;padding:0 32px;
+  font-family:var(--ff);font-size:1.1rem;font-weight:400;font-style:italic;
+  color:rgba(255,255,255,.25);white-space:nowrap;
+  transition:color .3s;
+}
+.mi:hover{color:var(--w50)}
+.mi-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:.6}
+@keyframes mScroll{to{transform:translateX(-50%)}}
+
+/* ══════════════════════════════════════════════
+   ABOUT SECTION
+══════════════════════════════════════════════ */
+#about{padding:130px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:800px){.about-grid{grid-template-columns:1fr}}
+.about-visual{position:relative}
+.about-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;padding:40px;position:relative;overflow:hidden;
+  transition:transform .5s var(--ease),box-shadow .5s ease;
+}
+.about-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 0 1px rgba(58,123,213,.25);
+}
+.about-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 0% 0%,rgba(58,123,213,.1),transparent 70%);
+  opacity:0;transition:opacity .4s;
+}
+.about-card:hover::before{opacity:1}
+.ac-icon{
+  width:60px;height:60px;border-radius:16px;
+  background:rgba(58,123,213,.12);border:1px solid rgba(58,123,213,.25);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:22px;
+  transition:transform .4s var(--spring),background .3s;
+}
+.about-card:hover .ac-icon{transform:scale(1.1) rotate(6deg);background:rgba(58,123,213,.2)}
+.ac-title{
+  font-family:var(--ff);font-size:1.4rem;font-weight:600;
+  margin-bottom:10px;color:var(--w);
+}
+.ac-desc{font-size:.88rem;line-height:1.8;color:var(--w50)}
+/* Stacked cards */
+.about-card-stack{position:relative}
+.about-card-stack .about-card:nth-child(2){
+  position:absolute;top:-16px;right:-16px;left:16px;
+  z-index:-1;opacity:.5;transform:none!important;
+}
+.about-card-stack .about-card:nth-child(3){
+  position:absolute;top:-30px;right:-30px;left:30px;
+  z-index:-2;opacity:.25;transform:none!important;
+}
+/* SVG illustration */
+.about-svg-wrap{
+  width:100%;aspect-ratio:4/3;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.about-svg-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(58,123,213,.08),transparent 70%);
+}
+.about-quote{
+  margin-top:32px;padding:24px 28px;
+  border-left:2px solid var(--blue);
+  background:rgba(58,123,213,.06);border-radius:0 12px 12px 0;
+}
+.about-quote p{
+  font-family:var(--ff);font-size:1.2rem;font-style:italic;
+  color:var(--w80);line-height:1.7;
+}
+
+/* Text highlight sweep */
+.txt-hl{
+  position:relative;display:inline;
+}
+.txt-hl::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--ice));
+  transition:width .6s var(--ease);
+}
+.txt-hl.vis::after,.section-title:hover .txt-hl::after{width:100%}
+
+/* ══════════════════════════════════════════════
+   PROCESS SECTION
+══════════════════════════════════════════════ */
+#process{padding:130px 0;background:linear-gradient(180deg,transparent,rgba(10,24,48,.6),transparent)}
+.process-wrap{position:relative;max-width:860px;margin:0 auto}
+/* SVG connecting line */
+.process-svg{
+  position:absolute;left:28px;top:60px;bottom:60px;width:2px;z-index:0;
+  overflow:visible;
+}
+.process-line-path{
+  stroke:url(#procGrad);stroke-width:2;fill:none;
+  stroke-dasharray:1000;stroke-dashoffset:1000;
+  transition:stroke-dashoffset 2s var(--ease);
+}
+.process-line-path.vis{stroke-dashoffset:0}
+.proc-step{
+  display:flex;gap:40px;align-items:flex-start;
+  margin-bottom:52px;position:relative;z-index:1;
+}
+.proc-num{
+  width:56px;height:56px;flex-shrink:0;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),#1a5cb8);
+  border:1px solid rgba(90,163,245,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ffz);font-size:1rem;font-weight:700;color:var(--w);
+  box-shadow:0 8px 30px rgba(58,123,213,.35),0 0 0 6px rgba(58,123,213,.08);
+  animation:numPulse 3s ease-in-out infinite;flex-shrink:0;
+}
+.proc-step:nth-child(2) .proc-num{animation-delay:.5s}
+.proc-step:nth-child(3) .proc-num{animation-delay:1s}
+.proc-step:nth-child(4) .proc-num{animation-delay:1.5s}
+.proc-step:nth-child(5) .proc-num{animation-delay:2s}
+@keyframes numPulse{
+  0%,100%{box-shadow:0 8px 30px rgba(58,123,213,.35),0 0 0 6px rgba(58,123,213,.08)}
+  50%{box-shadow:0 8px 30px rgba(58,123,213,.5),0 0 0 12px rgba(58,123,213,.12)}
+}
+.proc-content{
+  padding:28px 32px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;flex:1;
+  transition:transform .4s var(--ease),border-color .3s,box-shadow .3s;
+}
+.proc-content:hover{
+  transform:translateX(8px);
+  border-color:rgba(58,123,213,.25);
+  box-shadow:0 8px 30px rgba(0,0,0,.2),0 0 0 1px rgba(58,123,213,.15);
+}
+.proc-icon{margin-bottom:14px}
+.proc-icon svg{animation:iconSpin 8s linear infinite}
+.proc-h{font-family:var(--ff);font-size:1.35rem;font-weight:600;margin-bottom:8px;color:var(--w)}
+.proc-p{font-size:.88rem;line-height:1.8;color:var(--w50)}
+
+/* ══════════════════════════════════════════════
+   BOOK PREVIEW SECTION
+══════════════════════════════════════════════ */
+#book-preview{padding:130px 0;overflow:hidden}
+.preview-inner{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;
+}
+@media(max-width:900px){.preview-inner{grid-template-columns:1fr}}
+/* Page flip book */
+.flip-book-wrap{
+  position:relative;display:flex;justify-content:center;
+}
+.flip-book{
+  width:300px;height:420px;position:relative;
+  perspective:1200px;
+}
+.flip-book-cover{
+  width:300px;height:420px;
+  background:linear-gradient(145deg,#0d2045,#1a3a6e,#0f2c5a);
+  border-radius:3px 14px 14px 3px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),8px 0 20px rgba(0,0,0,.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  transform-origin:left center;
+  animation:bookBob 6s ease-in-out infinite;
+}
+@keyframes bookBob{
+  0%,100%{transform:rotateY(0) translateY(0)}
+  50%{transform:rotateY(-3deg) translateY(-8px)}
+}
+/* Pages fanning out */
+.flip-page{
+  position:absolute;top:0;right:-1px;
+  width:297px;height:420px;
+  background:linear-gradient(90deg,#dde3ef,#e8ecf4,#f5f6f8);
+  border-radius:0 12px 12px 0;
+  transform-origin:left center;
+  box-shadow:inset -5px 0 15px rgba(0,0,0,.1);
+  backface-visibility:hidden;
+}
+.fp1{transform:rotateY(-2deg);z-index:-1;background:linear-gradient(90deg,#d5dbe9,#e0e6f0)}
+.fp2{transform:rotateY(-5deg);z-index:-2;background:linear-gradient(90deg,#ccd3e2,#d8dee8)}
+.fp3{transform:rotateY(-9deg);z-index:-3;background:linear-gradient(90deg,#c2cad8,#d0d8e4)}
+/* Page content lines */
+.flip-page::after{
+  content:'';position:absolute;inset:20px;
+  background:repeating-linear-gradient(
+    180deg,transparent 0,transparent 16px,rgba(0,0,0,.06) 16px,rgba(0,0,0,.06) 17px
+  );
+}
+/* Turning page animation */
+.flip-turning{
+  position:absolute;top:0;right:0;
+  width:297px;height:420px;
+  background:linear-gradient(90deg,#e8ecf4,#f0f4fa);
+  border-radius:0 12px 12px 0;
+  transform-origin:left center;
+  transform:rotateY(0);
+  animation:pageTurn 4s ease-in-out infinite 1s;
+  box-shadow:4px 0 15px rgba(0,0,0,.1);
+  backface-visibility:hidden;
+}
+@keyframes pageTurn{
+  0%,35%{transform:rotateY(0)}
+  60%,80%{transform:rotateY(-175deg)}
+  100%{transform:rotateY(0)}
+}
+.flip-shadow{
+  position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
+  width:280px;height:20px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.4),transparent 70%);
+  filter:blur(6px);
+  animation:bookBob 6s ease-in-out infinite;
+}
+/* Preview details */
+.preview-features{display:flex;flex-direction:column;gap:20px}
+.pf-item{
+  display:flex;gap:18px;align-items:flex-start;
+  padding:20px 24px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  transition:all .4s var(--ease);
+}
+.pf-item:hover{
+  background:rgba(58,123,213,.07);
+  border-color:rgba(58,123,213,.25);
+  transform:translateX(8px);
+}
+.pf-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:12px;
+  background:rgba(58,123,213,.12);border:1px solid rgba(58,123,213,.2);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .4s var(--spring);
+}
+.pf-item:hover .pf-icon{transform:scale(1.12) rotate(-5deg)}
+.pf-title{font-family:var(--ff);font-size:1.1rem;font-weight:600;color:var(--w);margin-bottom:4px}
+.pf-desc{font-size:.82rem;color:var(--w50);line-height:1.7}
+
+/* ══════════════════════════════════════════════
+   SERVICES SECTION
+══════════════════════════════════════════════ */
+#services{padding:130px 0}
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;margin-top:60px;
+}
+.svc-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;padding:36px 30px;
+  position:relative;overflow:hidden;
+  transition:transform .5s var(--ease),box-shadow .5s ease,border-color .3s;
+  cursor:none;
+}
+/* Animated glow border */
+.svc-card::before{
+  content:'';position:absolute;inset:-1px;border-radius:23px;
+  background:linear-gradient(135deg,rgba(58,123,213,.0),rgba(90,163,245,.0));
+  z-index:-1;
+  transition:all .4s;
+}
+.svc-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.svc-card:hover{
+  transform:translateY(-12px) scale(1.01);
+  box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(58,123,213,.3);
+  border-color:rgba(58,123,213,.3);
+}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-badge{
+  display:inline-block;padding:4px 14px;
+  border-radius:100px;font-size:.62rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.sb-blue{background:rgba(58,123,213,.15);color:var(--sky);border:1px solid rgba(58,123,213,.25)}
+.sb-gold{background:rgba(201,168,76,.1);color:var(--goldlt);border:1px solid rgba(201,168,76,.2)}
+.svc-icon{
+  width:58px;height:58px;border-radius:16px;
+  background:rgba(58,123,213,.1);border:1px solid rgba(58,123,213,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:22px;
+  transition:transform .4s var(--spring),background .3s;
+}
+.svc-card:hover .svc-icon{transform:scale(1.12) rotate(-6deg);background:rgba(58,123,213,.2)}
+.svc-title{font-family:var(--ff);font-size:1.35rem;font-weight:600;color:var(--w);margin-bottom:10px}
+.svc-desc{font-size:.85rem;line-height:1.8;color:var(--w50);margin-bottom:24px}
+.svc-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+.svc-features li{
+  font-size:.78rem;color:var(--w50);display:flex;align-items:center;gap:8px;
+}
+.svc-features li::before{content:'✦';font-size:.55rem;color:var(--gold);flex-shrink:0}
+.svc-price{
+  font-family:var(--ff);font-size:1.8rem;font-weight:600;
+  background:linear-gradient(135deg,var(--w),var(--ice));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.svc-price-note{font-size:.72rem;color:var(--w50);margin-top:2px}
+.svc-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;font-size:.78rem;font-weight:600;
+  color:var(--sky);letter-spacing:.08em;text-transform:uppercase;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .3s,transform .3s var(--ease);
+}
+.svc-card:hover .svc-cta{opacity:1;transform:translateY(0)}
+/* Card inner spotlight */
+.svc-spot{
+  position:absolute;width:200px;height:200px;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(58,123,213,.12),transparent 70%);
+  transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .3s;
+}
+.svc-card:hover .svc-spot{opacity:1}
+
+/* ══════════════════════════════════════════════
+   STATS SECTION
+══════════════════════════════════════════════ */
+#stats{padding:100px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-box{text-align:center;padding:32px 20px;position:relative}
+.stat-box::after{
+  content:'';position:absolute;right:0;top:20%;bottom:20%;
+  width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.1),transparent);
+}
+.stat-box:last-child::after{display:none}
+.stat-n{
+  font-family:var(--ff);font-size:3.5rem;font-weight:700;line-height:1;
+  background:linear-gradient(135deg,var(--w),var(--ice));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-suf{font-size:2rem}
+.stat-label{font-size:.72rem;color:var(--w50);letter-spacing:.15em;text-transform:uppercase;margin-top:8px}
+
+/* ══════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════ */
+#testimonials{padding:130px 0}
+.testi-wrap{position:relative;overflow:hidden;max-width:900px;margin:0 auto}
+.testi-slider{display:flex;transition:transform .7s var(--ease)}
+.testi-slide{
+  min-width:100%;padding:0 20px;
+}
+.testi-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:28px;padding:48px 50px;
+  position:relative;overflow:hidden;
+}
+.testi-card::before{
+  content:'❝';position:absolute;top:-10px;left:30px;
+  font-family:var(--ff);font-size:8rem;color:rgba(58,123,213,.1);
+  line-height:1;pointer-events:none;
+}
+.testi-stars{display:flex;gap:4px;margin-bottom:20px}
+.testi-star{color:var(--gold);font-size:1rem;animation:starPop .4s var(--spring) both}
+.testi-text{
+  font-family:var(--ff);font-size:1.25rem;font-style:italic;
+  line-height:1.75;color:var(--w80);margin-bottom:30px;
+  position:relative;z-index:1;
+}
+.testi-author{display:flex;align-items:center;gap:16px}
+.testi-avatar{
+  width:50px;height:50px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ffz);font-size:1.1rem;font-weight:600;
+  color:var(--w);flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),#1a5cb8);
+  border:2px solid rgba(90,163,245,.3);
+}
+.testi-name{font-family:var(--ff);font-size:1rem;font-weight:600;color:var(--w)}
+.testi-role{font-size:.78rem;color:var(--w50);margin-top:2px}
+.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:36px}
+.tdot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.2);cursor:pointer;
+  transition:all .3s var(--ease);
+}
+.tdot.active{
+  background:var(--blue);width:24px;border-radius:4px;
+  box-shadow:0 0 10px rgba(58,123,213,.5);
+}
+/* Nav arrows */
+.testi-nav{
+  display:flex;justify-content:center;gap:12px;margin-top:24px;
+}
+.tnav-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--w80);
+  transition:all .25s var(--ease);
+}
+.tnav-btn:hover{background:rgba(58,123,213,.15);border-color:rgba(58,123,213,.3);transform:scale(1.06)}
+
+/* ══════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════ */
+#faq{padding:100px 0}
+.faq-wrap{max-width:720px;margin:0 auto}
+.faq-item{
+  border-bottom:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;
+  padding:26px 0;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  font-family:var(--ff);font-size:1.15rem;font-weight:500;
+  color:var(--w80);cursor:pointer;
+  transition:color .25s;
+}
+.faq-q:hover{color:var(--w)}
+.faq-q-icon{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .4s var(--spring),background .25s;
+}
+.faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(58,123,213,.15)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s var(--ease),padding .5s var(--ease);
+}
+.faq-a-inner{
+  padding:0 0 24px;font-size:.9rem;line-height:1.85;color:var(--w50);
+}
+.faq-item.open .faq-a{max-height:300px}
+
+/* ══════════════════════════════════════════════
+   CONTACT SECTION
+══════════════════════════════════════════════ */
+#contact{padding:130px 0}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.3fr;
+  gap:80px;align-items:start;
+}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.contact-info{display:flex;flex-direction:column;gap:20px}
+.ci-card{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:22px 24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;
+  transition:all .4s var(--ease);
+}
+.ci-card:hover{
+  background:rgba(58,123,213,.07);border-color:rgba(58,123,213,.25);
+  transform:translateX(6px);
+}
+.ci-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:12px;
+  background:rgba(58,123,213,.12);border:1px solid rgba(58,123,213,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.ci-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w50);margin-bottom:4px}
+.ci-val{font-family:var(--ff);font-size:1.1rem;font-weight:500;color:var(--w)}
+.ci-note{font-size:.75rem;color:var(--w50);margin-top:2px}
+/* Form */
+.lix-form{display:flex;flex-direction:column;gap:20px}
+.lf-group{position:relative}
+.lf-label{
+  position:absolute;left:18px;top:16px;
+  font-size:.82rem;color:rgba(255,255,255,.3);
+  transition:all .3s var(--ease);pointer-events:none;
+  letter-spacing:.04em;
+}
+.lf-input{
+  width:100%;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:28px 18px 12px;
+  font-family:var(--ffi);font-size:.92rem;color:var(--w);
+  outline:none;resize:none;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+  -webkit-appearance:none;
+}
+.lf-input:focus,.lf-input:not(:placeholder-shown){
+  border-color:rgba(58,123,213,.5);
+  background:rgba(58,123,213,.06);
+  box-shadow:0 0 0 4px rgba(58,123,213,.08),0 0 20px rgba(58,123,213,.08);
+}
+.lf-input:focus + .lf-label,.lf-input:not(:placeholder-shown) + .lf-label{
+  top:9px;font-size:.68rem;color:var(--sky);letter-spacing:.1em;text-transform:uppercase;
+}
+.lf-input::placeholder{color:transparent}
+.lf-bar{
+  position:absolute;bottom:0;left:18px;right:18px;height:1.5px;
+  background:linear-gradient(90deg,var(--blue),var(--ice));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);border-radius:1px;
+}
+.lf-input:focus ~ .lf-bar{transform:scaleX(1)}
+
+/* ══════════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════════ */
+#cta{
+  padding:140px 0;text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(6,20,44,.8),transparent);
+  position:relative;overflow:hidden;
+}
+.cta-bg-pulse{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(58,123,213,.08) 0%,transparent 70%);
+  border-radius:50%;
+  animation:ctaPulse 5s ease-in-out infinite;
+}
+@keyframes ctaPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}
+  50%{transform:translate(-50%,-50%) scale(1.2);opacity:1}
+}
+.cta-h{
+  font-family:var(--ff);font-size:clamp(2.8rem,6vw,5.5rem);
+  font-weight:500;line-height:1.1;
+  margin-bottom:24px;position:relative;z-index:1;
+}
+.cta-sub{
+  font-size:1.05rem;color:var(--w50);line-height:1.8;
+  max-width:520px;margin:0 auto 50px;position:relative;z-index:1;
+}
+/* Animated gradient border on CTA btn */
+.btn-lix-cta{
+  position:relative;padding:18px 52px;font-size:.95rem;
+  background:transparent;color:var(--w);
+  border:none;overflow:hidden;z-index:1;
+}
+.btn-lix-cta::before{
+  content:'';position:absolute;inset:-2px;border-radius:100px;
+  background:linear-gradient(90deg,var(--blue),var(--ice),var(--gold),var(--sky),var(--blue));
+  background-size:400% 100%;
+  animation:gradBorder 4s linear infinite;
+  z-index:-2;
+}
+.btn-lix-cta::after{
+  content:'';position:absolute;inset:2px;border-radius:100px;
+  background:var(--navy);z-index:-1;
+}
+@keyframes gradBorder{to{background-position:400% 0}}
+.btn-lix-cta:hover{transform:translateY(-4px) scale(1.03)}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer{
+  padding:60px 0 40px;
+  border-top:1px solid rgba(255,255,255,.06);
+  position:relative;z-index:1;
+}
+/* Animated footer divider */
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),var(--gold),var(--sky),transparent);
+  background-size:400% 100%;
+  animation:gradBorder 6s linear infinite;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:60px;margin-bottom:50px;
+}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{
+  font-family:var(--ffz);font-size:1.4rem;font-weight:600;
+  letter-spacing:.15em;color:var(--w);margin-bottom:14px;
+}
+.footer-brand span{color:var(--gold)}
+.footer-tagline{font-size:.85rem;line-height:1.8;color:var(--w50);max-width:280px}
+.footer-col-title{
+  font-family:var(--ffz);font-size:.72rem;font-weight:600;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--w50);margin-bottom:20px;
+}
+.footer-link{
+  display:block;font-size:.85rem;color:rgba(255,255,255,.35);
+  margin-bottom:10px;
+  position:relative;width:fit-content;
+  transition:color .25s;
+}
+.footer-link::after{
+  content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;
+  background:var(--sky);transition:width .3s var(--ease);
+}
+.footer-link:hover{color:var(--w80)}
+.footer-link:hover::after{width:100%}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.05);
+  padding-top:28px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:gap;gap:16px;
+}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.25);letter-spacing:.05em}
+
+/* WhatsApp float */
+#wa-float{
+  position:fixed;bottom:28px;right:28px;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#1da851);
+  display:flex;align-items:center;justify-content:center;
+  z-index:5000;cursor:pointer;
+  box-shadow:0 8px 28px rgba(37,211,102,.45);
+  transition:transform .25s var(--spring),box-shadow .25s;
+  text-decoration:none;animation:waFloat 3s ease-in-out infinite;
+}
+@keyframes waFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-4px) scale(1.02)}
+}
+#wa-float:hover{transform:translateY(-4px) scale(1.1)!important;box-shadow:0 16px 40px rgba(37,211,102,.6)}
+
+/* ── MOBILE ──────────────────────────────────── */
+@media(max-width:768px){
+  .book-scene{width:200px;height:280px}
+  .bf-front{width:200px;height:280px}
+  .bf-back{width:200px;height:280px}
+  .bf-pages{right:-18px}
+  .bf-spine{left:-18px;width:36px}
+  .bf-top{width:200px}
+  .bf-bottom{width:200px}
+  .flip-book,.flip-book-cover,.flip-page,.flip-turning{width:240px;height:336px}
+  .flip-shadow{width:200px}
+  .services-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv,.rv-l,.rv-r,.rv-sc{opacity:1!important;transform:none!important}
+}
+
+</style>
+</head>
+<body>
+<!-- ═══ NAV ══════════════════════════════════════════════════ -->
+<nav id="KN" role="navigation" aria-label="Main navigation">
+  <canvas id="KN-canvas"></canvas>
+  <div id="KN-line"></div>
+  <div id="KN-glow"></div>
+
+  <div id="KN-row">
+
+    <!-- LOGO -->
+    <a href="index.html" class="kn-logo" aria-label="Kron Home">
+      <div class="kn-orb">
+        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e0f4ff"/>
+              <stop offset="50%" stop-color="#7dd3fc"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#bae6ff"/>
+              <stop offset="100%" stop-color="#4a90d9"/>
+            </linearGradient>
+            <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f0f9ff"/>
+              <stop offset="100%" stop-color="#93c5fd"/>
+            </linearGradient>
+            <filter id="gf">
+              <feGaussianBlur stdDeviation=".9" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <polygon points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
+            fill="rgba(7,20,46,0.88)" stroke="url(#g1)" stroke-width="1"/>
+          <polygon points="21,2 38,11.5 21,21" fill="rgba(186,230,255,0.05)"/>
+          <polygon points="21,.5 39.5,11 39.5,31 21,41.5 2.5,31 2.5,11"
+            fill="none" stroke="rgba(147,210,255,0.18)" stroke-width=".5" stroke-dasharray="3 4"/>
+          <line x1="14" y1="11" x2="14" y2="31"
+            stroke="url(#g3)" stroke-width="2.6" stroke-linecap="round" filter="url(#gf)"/>
+          <path d="M14 21.5 L26.5 11"
+            stroke="url(#g1)" stroke-width="2.3" stroke-linecap="round" filter="url(#gf)"/>
+          <path d="M14 21.5 L27 31"
+            stroke="url(#g2)" stroke-width="2.3" stroke-linecap="round" filter="url(#gf)"/>
+          <circle cx="14" cy="21.5" r="2.4" fill="#0d2250" stroke="url(#g1)" stroke-width=".9"/>
+          <circle cx="14" cy="21.5" r="1" fill="#bae6ff" opacity=".9"/>
+          <g transform="translate(33.5,9)" opacity=".8">
+            <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#bae6ff" stroke-width=".9" stroke-linecap="round"/>
+            <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#bae6ff" stroke-width=".9" stroke-linecap="round"/>
+            <line x1="-2" y1="-2" x2="2" y2="2" stroke="#e0f4ff" stroke-width=".55" stroke-linecap="round"/>
+            <line x1="2" y1="-2" x2="-2" y2="2" stroke="#e0f4ff" stroke-width=".55" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(8.5,33)" opacity=".45">
+            <line x1="0" y1="-2" x2="0" y2="2" stroke="#7dd3fc" stroke-width=".7" stroke-linecap="round"/>
+            <line x1="-2" y1="0" x2="2" y2="0" stroke="#7dd3fc" stroke-width=".7" stroke-linecap="round"/>
+          </g>
+          <path d="M8 14 Q17 8 28 12" stroke="rgba(224,242,254,0.32)" stroke-width="1" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="kn-words">
+        <span class="kn-name">Kron</span>
+        <span class="kn-tag">Digital Studio</span>
+      </div>
+    </a>
+
+    <!-- SINGLE TOGGLE BUTTON — all devices -->
+    <button class="kn-burger" id="KN-burger"
+            aria-label="Toggle menu" aria-expanded="false" aria-controls="KN-drawer">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</nav>
+
+<div id="KN-backdrop" aria-hidden="true"></div>
+
+<!-- ═══ DRAWER ════════════════════════════════════════════════ -->
+<div id="KN-drawer" role="dialog" aria-modal="true" aria-label="Navigation">
+
+  <div class="knd-head">
+    <a href="index.html" class="knd-mini-logo">
+      <div class="knd-mini-mark">
+        <svg viewBox="0 0 42 42" fill="none">
+          <polygon points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
+            fill="rgba(7,20,46,0.88)" stroke="url(#g1)" stroke-width="1"/>
+          <line x1="14" y1="11" x2="14" y2="31" stroke="url(#g3)" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M14 21.5 L26.5 11" stroke="url(#g1)" stroke-width="2.3" stroke-linecap="round"/>
+          <path d="M14 21.5 L27 31"   stroke="url(#g2)" stroke-width="2.3" stroke-linecap="round"/>
+          <circle cx="14" cy="21.5" r="2.4" fill="#0d2250" stroke="url(#g1)" stroke-width=".9"/>
+          <circle cx="14" cy="21.5" r="1"   fill="#bae6ff" opacity=".9"/>
+        </svg>
+      </div>
+      <div>
+        <div class="knd-mini-name">Kron</div>
+        <div class="knd-mini-tag">Digital Studio</div>
+      </div>
+    </a>
+    <button class="knd-close" id="KND-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="knd-nav" aria-label="Site links">
+    <a href="business-advice.html" class="knd-link" data-page="business-advice">
+      <span class="knd-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+        </svg>
+      </span>
+      <span class="knd-text">
+        <span class="knd-title">Business Advice</span>
+        <span class="knd-desc">Strategy &amp; growth consulting</span>
+      </span>
+      <span class="knd-arrow">›</span>
+    </a>
+    <a href="content-writing.html" class="knd-link" data-page="content-writing">
+      <span class="knd-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </span>
+      <span class="knd-text">
+        <span class="knd-title">Content Writing</span>
+        <span class="knd-desc">Copy that converts &amp; compels</span>
+      </span>
+      <span class="knd-arrow">›</span>
+    </a>
+    <a href="motion-invitations.html" class="knd-link" data-page="motion-invitations">
+      <span class="knd-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+      </span>
+      <span class="knd-text">
+        <span class="knd-title">Motion Invitations</span>
+        <span class="knd-desc">Animated digital experiences</span>
+      </span>
+      <span class="knd-arrow">›</span>
+    </a>
+    <a href="fullstack.html" class="knd-link" data-page="fullstack">
+      <span class="knd-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </span>
+      <span class="knd-text">
+        <span class="knd-title">Fullstack Dev</span>
+        <span class="knd-desc">End-to-end web engineering</span>
+      </span>
+      <span class="knd-arrow">›</span>
+    </a>
+  </nav>
+
+  <div class="knd-cta">
+    <span class="knd-cta-eyebrow">Ready to build?</span>
+    <span class="knd-cta-title">Start Your Project</span>
+    <a href="index.html" class="knd-cta-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>Explore Kron
+    </a>
+  </div>
+
+  <div class="knd-foot">
+    <p class="knd-tagline">Crafting digital excellence, one pixel at a time.</p>
+    <div class="knd-socials">
+      <a href="#" class="knd-soc" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+      <a href="#" class="knd-soc" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="#" class="knd-soc" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+<script>
+(function(){
+(function(){
+  const nav    = document.getElementById('KN');
+  const burger = document.getElementById('KN-burger');
+  const close  = document.getElementById('KND-close');
+  const drawer = document.getElementById('KN-drawer');
+  const bd     = document.getElementById('KN-backdrop');
+  const glow   = document.getElementById('KN-glow');
+  const canvas = document.getElementById('KN-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  /* ── SCROLL: hide on down, show on up ─────────────────── */
+  let lastY = 0, ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 20);
+        if (y > lastY + 4 && y > 80) {
+          nav.classList.add('kn-hidden');
+        } else if (y < lastY - 4) {
+          nav.classList.remove('kn-hidden');
+        }
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive: true});
+
+  /* ── DRAWER OPEN / CLOSE ─────────────────────────────── */
+  let open = false;
+  function openD() {
+    open = true;
+    nav.classList.remove('kn-hidden'); // always show nav when drawer opens
+    drawer.classList.add('open');
+    bd.classList.add('open');
+    burger.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeD() {
+    open = false;
+    drawer.classList.remove('open');
+    bd.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => open ? closeD() : openD());
+  close.addEventListener('click', closeD);
+  bd.addEventListener('click', closeD);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeD));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeD(); });
+
+  /* ── ACTIVE PAGE ─────────────────────────────────────── */
+  const pg = location.pathname.split('/').pop().replace('.html','') || 'index';
+  document.querySelectorAll('[data-page]').forEach(el => {
+    if (el.dataset.page === pg) el.classList.add('active');
+  });
+
+  /* ── CURSOR GLOW (PC only) ───────────────────────────── */
+  const isPC = window.matchMedia('(pointer:fine)').matches;
+  if (isPC) {
+    nav.addEventListener('mousemove', e => {
+      const r = nav.getBoundingClientRect();
+      glow.style.left  = (e.clientX - r.left)  + 'px';
+      glow.style.top   = (e.clientY - r.top)   + 'px';
+      glow.style.opacity = '1';
+      mx = e.clientX - r.left;
+      my = e.clientY - r.top;
+    });
+    nav.addEventListener('mouseleave', () => {
+      glow.style.opacity = '0';
+      mx = -999; my = -999;
+    });
+  }
+
+  /* ── PARTICLE FIELD ──────────────────────────────────── */
+  let W, H, mx = -999, my = -999;
+  const PARTICLE_COUNT = isPC ? 90 : 30;
+  const CONNECT_DIST   = isPC ? 90 : 0;   // connections only on PC
+  const CURSOR_DIST    = 100;
+  const CLR = [
+    'rgba(74,144,217,',
+    'rgba(147,210,255,',
+    'rgba(186,230,255,',
+    'rgba(100,160,240,',
+    'rgba(201,168,76,'   // occasional gold
+  ];
+
+  function rsz() {
+    W = canvas.width  = nav.offsetWidth;
+    H = canvas.height = nav.offsetHeight;
+  }
+  rsz();
+  window.addEventListener('resize', rsz);
+
+  function rnd(a, b) { return Math.random() * (b - a) + a; }
+
+  function mkParticle() {
+    return {
+      x:   rnd(0, W),
+      y:   rnd(H * .1, H * .9),
+      r:   rnd(.3, isPC ? 1.8 : 1.2),
+      dx:  rnd(-.15, .15),
+      dy:  rnd(-.25, -.04),
+      a:   rnd(.3, .95),
+      da:  rnd(.0015, .005),
+      c:   CLR[~~(Math.random() * CLR.length)]
+    };
+  }
+
+  const pts = [];
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const p = mkParticle();
+    p.y = rnd(0, H);          // scatter y on init
+    pts.push(p);
+  }
+
+  // PC-only: shooting star / comet
+  let comet = null;
+  function mkComet() {
+    return {
+      x: rnd(-60, W * .4),
+      y: rnd(0, H),
+      len: rnd(40, 90),
+      speed: rnd(4, 7),
+      a: .8,
+      angle: rnd(-.08, .08)   // nearly horizontal
+    };
+  }
+  if (isPC) {
+    setTimeout(() => { comet = mkComet(); }, 2000);
+  }
+
+  (function tick() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* ── draw connection lines (PC only) ── */
+    if (CONNECT_DIST > 0) {
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x;
+          const dy = pts[i].y - pts[j].y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          if (d < CONNECT_DIST) {
+            const alpha = (1 - d / CONNECT_DIST) * .18;
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = `rgba(147,210,255,${alpha})`;
+            ctx.lineWidth = .6;
+            ctx.stroke();
+          }
+        }
+        // cursor proximity — highlight nearby particles on PC
+        const cdx = pts[i].x - mx;
+        const cdy = pts[i].y - my;
+        const cd  = Math.sqrt(cdx*cdx + cdy*cdy);
+        if (cd < CURSOR_DIST && isPC) {
+          const a2 = (1 - cd / CURSOR_DIST) * .35;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(mx, my);
+          ctx.strokeStyle = `rgba(186,230,255,${a2})`;
+          ctx.lineWidth = .7;
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* ── draw particles ── */
+    pts.forEach((p, i) => {
+      // cursor repulsion on PC
+      if (isPC) {
+        const dx = p.x - mx, dy = p.y - my;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 55) {
+          p.dx += (dx / d) * .04;
+          p.dy += (dy / d) * .03;
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.c + p.a + ')';
+      ctx.fill();
+
+      // glow ring for larger particles on PC
+      if (isPC && p.r > 1.2) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.c + (p.a * .08) + ')';
+        ctx.fill();
+      }
+
+      p.x  += p.dx;
+      p.y  += p.dy;
+      p.a  -= p.da;
+
+      // dampen dx drift
+      p.dx *= .995;
+
+      if (p.a <= 0 || p.y < -3) {
+        pts[i]   = mkParticle();
+        pts[i].y = H + 2;
+        pts[i].a = 0;
+      }
+    });
+
+    /* ── comet (PC only) ── */
+    if (comet) {
+      const tail = comet.len;
+      const grd  = ctx.createLinearGradient(
+        comet.x, comet.y,
+        comet.x - tail, comet.y - tail * comet.angle * 8
+      );
+      grd.addColorStop(0, `rgba(186,230,255,${comet.a})`);
+      grd.addColorStop(.4, `rgba(147,210,255,${comet.a * .5})`);
+      grd.addColorStop(1, 'rgba(147,210,255,0)');
+      ctx.beginPath();
+      ctx.moveTo(comet.x, comet.y);
+      ctx.lineTo(comet.x - tail, comet.y + tail * comet.angle);
+      ctx.strokeStyle = grd;
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+
+      // head glow
+      ctx.beginPath();
+      ctx.arc(comet.x, comet.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(224,244,255,${comet.a})`;
+      ctx.fill();
+
+      comet.x += comet.speed;
+      if (comet.x > W + 80) {
+        // relaunch after a pause
+        comet = null;
+        setTimeout(() => { comet = mkComet(); }, rnd(3000, 7000));
+      }
+    }
+
+    requestAnimationFrame(tick);
+  })();
+
+})();
+})();
+</script>
+
+<!-- PROGRESS BAR -->
+<div id="lix-prog"></div>
+
+<!-- CURSOR -->
+<div id="lix-cursor"></div>
+<div id="lix-cursor-ring"></div>
+<div id="lix-cursor-glow"></div>
+
+<!-- LIGHT BEAMS -->
+<div class="lix-beam"></div>
+<div class="lix-beam"></div>
+<div class="lix-beam"></div>
+<div class="lix-scan"></div>
+
+<!-- BG CANVAS -->
+<canvas id="lix-bg-canvas"></canvas>
+
+<!-- WHATSAPP FLOAT -->
+<a id="wa-float" href="https://wa.me/919094946746" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-morphs">
+    <div class="hero-morph hm1"></div>
+    <div class="hero-morph hm2"></div>
+    <div class="hero-morph hm3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="ey-pulse"></span>
+          LIX Strategy Studio
+        </div>
+        <h1 class="hero-h1">
+          <span class="hl1">
+            <span class="hw" style="animation-delay:.3s">Your Life.</span>
+          </span>
+          <span class="hl2">
+            <span class="hw hblue" style="animation-delay:.6s">Your Strategy.</span>
+          </span>
+          <span class="hl3">
+            <span class="hw hgold" style="animation-delay:.9s">Your Book.</span>
+          </span>
+        </h1>
+        <p class="hero-sub">We transform your experiences, ambitions, and knowledge into a professionally written custom strategy book designed exclusively for you.</p>
+        <div class="hero-btns">
+          <button class="btn-lix btn-lix-primary" id="btn-start">
+            <span class="btn-shimmer"></span>
+            <span>Start Your Custom Book</span>
+            <span class="btn-arrow">→</span>
+          </button>
+          <button class="btn-lix btn-lix-ghost" id="btn-learn">
+            <span>See How It Works</span>
+            <span class="btn-arrow">↓</span>
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-n" data-count="500"><span>0</span>+</div>
+            <div class="hstat-l">Books Created</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n" data-count="98"><span>0</span>%</div>
+            <div class="hstat-l">Client Satisfaction</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n" data-count="48"><span>0</span>h</div>
+            <div class="hstat-l">Avg. Turnaround</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-book-wrap">
+        <div style="position:relative">
+          <div class="book-scene">
+            <div class="book-3d" id="book3d">
+              <div class="bf bf-front">
+                <div class="bc-glow"></div>
+                <div class="bc-lines"></div>
+                <div class="bc-shine"></div>
+                <div class="bc-logo">LIX</div>
+                <div class="bc-divider"></div>
+                <div class="bc-title">Strategy Studio</div>
+                <div class="bc-subtitle">Your Personal Book</div>
+                <div class="bc-emboss"></div>
+              </div>
+              <div class="bf bf-back"></div>
+              <div class="bf bf-spine"></div>
+              <div class="bf bf-pages"></div>
+              <div class="bf bf-top"></div>
+              <div class="bf bf-bottom"></div>
+            </div>
+          </div>
+          <div class="book-shadow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue">
+    <div class="hsc-line"></div>
+    <div class="hsc-txt">Scroll to Explore</div>
+  </div>
+</section>
+
+<!-- ════ MARQUEE ════ -->
+<div class="lix-marquee">
+  <div class="marquee-t">
+    <div class="mi">Personal Strategy Books <span class="mi-dot"></span></div>
+    <div class="mi">Entrepreneur Vision <span class="mi-dot"></span></div>
+    <div class="mi">Legacy Documentation <span class="mi-dot"></span></div>
+    <div class="mi">Founder Playbooks <span class="mi-dot"></span></div>
+    <div class="mi">Life Architecture <span class="mi-dot"></span></div>
+    <div class="mi">Custom Publishing <span class="mi-dot"></span></div>
+    <div class="mi">Strategic Clarity <span class="mi-dot"></span></div>
+    <div class="mi">Bespoke Storytelling <span class="mi-dot"></span></div>
+    <div class="mi">Personal Strategy Books <span class="mi-dot"></span></div>
+    <div class="mi">Entrepreneur Vision <span class="mi-dot"></span></div>
+    <div class="mi">Legacy Documentation <span class="mi-dot"></span></div>
+    <div class="mi">Founder Playbooks <span class="mi-dot"></span></div>
+    <div class="mi">Life Architecture <span class="mi-dot"></span></div>
+    <div class="mi">Custom Publishing <span class="mi-dot"></span></div>
+    <div class="mi">Strategic Clarity <span class="mi-dot"></span></div>
+    <div class="mi">Bespoke Storytelling <span class="mi-dot"></span></div>
+  </div>
+</div>
+
+<!-- ════ ABOUT ════ -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rv">
+        <div class="section-label">The Concept</div>
+        <h2 class="section-title">Intelligence meets <em>artistry</em></h2>
+        <p class="section-sub" style="margin-bottom:32px">LIX transforms raw personal and professional information into a structured, beautifully designed strategy book — uniquely yours.</p>
+        <div class="about-quote rv d2">
+          <p>"A book is the most powerful tool you can hand someone — especially when it was written for them, by professionals who understand their world."</p>
+        </div>
+        <div class="hero-btns" style="margin-top:36px">
+          <a href="#contact" class="btn-lix btn-lix-primary">
+            <span class="btn-shimmer"></span>
+            <span>Begin Your Journey</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card rv-r d1 tilt-card">
+          <div class="ac-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#5ba3f5" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="13" cy="13" r="11"/>
+              <path d="M13 7v6l4 2"/>
+            </svg>
+          </div>
+          <div class="ac-title">You Submit Your Story</div>
+          <div class="ac-desc">Share your life experiences, career milestones, goals, challenges, and future ambitions through our intelligent intake system.</div>
+        </div>
+        <div class="about-card rv-r d2 tilt-card" style="margin-top:20px">
+          <div class="ac-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round">
+              <path d="M3 18l5-5 4 4 7-8"/>
+              <circle cx="21" cy="5" r="3"/>
+            </svg>
+          </div>
+          <div class="ac-title">We Architect Your Strategy</div>
+          <div class="ac-desc">Our expert writers and strategists analyze your input and build a comprehensive, personalized framework for your life and vision.</div>
+        </div>
+        <div class="about-card rv-r d3 tilt-card" style="margin-top:20px">
+          <div class="ac-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#8ecaff" stroke-width="1.8" stroke-linecap="round">
+              <rect x="3" y="3" width="20" height="20" rx="3"/>
+              <path d="M7 9h12M7 13h8M7 17h5"/>
+            </svg>
+          </div>
+          <div class="ac-title">Your Book is Delivered</div>
+          <div class="ac-desc">A professionally typeset, premium quality book — physically printed or digitally delivered — that is entirely and exclusively yours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROCESS ════ -->
+<section id="process" style="padding:130px 0;background:linear-gradient(180deg,transparent,rgba(10,24,48,.5),transparent)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:80px" class="rv">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">Five steps to your <em>masterpiece</em></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center">A seamless, guided journey from raw information to a finished book you'll treasure forever.</p>
+    </div>
+    <div class="process-wrap">
+      <svg class="process-svg" viewBox="0 0 2 800" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="procGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3a7bd5"/>
+            <stop offset="50%" stop-color="#5ba3f5"/>
+            <stop offset="100%" stop-color="#c9a84c"/>
+          </linearGradient>
+        </defs>
+        <path class="process-line-path" d="M1 0 L1 800"/>
+      </svg>
+      <div class="proc-step rv d1">
+        <div class="proc-num">1</div>
+        <div class="proc-content">
+          <div class="proc-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#5ba3f5" stroke-width="1.8" stroke-linecap="round">
+              <path d="M14 4v8m0 0l-3-3m3 3l3-3M4 16h20M7 20h14M9 24h10"/>
+            </svg>
+          </div>
+          <div class="proc-h">Submit Your Information</div>
+          <div class="proc-p">Complete our detailed intake form covering your personal history, professional journey, life goals, belief systems, challenges, and future vision. The more you share, the more powerful your book.</div>
+        </div>
+      </div>
+      <div class="proc-step rv d2">
+        <div class="proc-num">2</div>
+        <div class="proc-content">
+          <div class="proc-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#8ecaff" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="14" cy="14" r="10"/>
+              <path d="M10 14l3 3 5-6"/>
+            </svg>
+          </div>
+          <div class="proc-h">Strategy Analysis</div>
+          <div class="proc-p">Our team of strategists and writers analyze your data, identify patterns, extract core insights, and architect a tailored framework for your personal or business strategy.</div>
+        </div>
+      </div>
+      <div class="proc-step rv d3">
+        <div class="proc-num">3</div>
+        <div class="proc-content">
+          <div class="proc-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round">
+              <path d="M4 6h20M4 12h14M4 18h20M4 24h10"/>
+            </svg>
+          </div>
+          <div class="proc-h">Writing &amp; Design</div>
+          <div class="proc-p">Professional writers craft every chapter with precision and elegance. Our designers typeset the book to premium publishing standards — every page a work of art.</div>
+        </div>
+      </div>
+      <div class="proc-step rv d4">
+        <div class="proc-num">4</div>
+        <div class="proc-content">
+          <div class="proc-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#5ba3f5" stroke-width="1.8" stroke-linecap="round">
+              <rect x="4" y="4" width="20" height="20" rx="3"/>
+              <path d="M9 14h10M14 9v10"/>
+            </svg>
+          </div>
+          <div class="proc-h">Custom Book Creation</div>
+          <div class="proc-p">Your book is assembled, reviewed, and refined until it perfectly reflects your vision. You receive drafts for feedback, ensuring complete alignment before final production.</div>
+        </div>
+      </div>
+      <div class="proc-step rv d5">
+        <div class="proc-num">5</div>
+        <div class="proc-content">
+          <div class="proc-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#e8d5a3" stroke-width="1.8" stroke-linecap="round">
+              <path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5L14 17l-4.9 2.6.9-5.5-4-3.9 5.5-.8L14 4z"/>
+            </svg>
+          </div>
+          <div class="proc-h">Delivery</div>
+          <div class="proc-p">Receive your finished book — digitally as a premium PDF, or as a physical hardcover printed to publishing standards and shipped directly to your door.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ BOOK PREVIEW ════ -->
+<section id="book-preview" style="padding:130px 0;overflow:hidden">
+  <div class="container">
+    <div class="preview-inner">
+      <div class="rv">
+        <div class="section-label">Book Preview</div>
+        <h2 class="section-title">Built like a <em>masterwork</em></h2>
+        <p class="section-sub" style="margin-bottom:44px">Every LIX book is produced to the standard of a commercially published title. Explore what yours could look like.</p>
+        <div class="preview-features">
+          <div class="pf-item rv d1">
+            <div class="pf-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5ba3f5" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="18" height="18" rx="3"/><path d="M6 7h10M6 11h7M6 15h5"/></svg>
+            </div>
+            <div>
+              <div class="pf-title">Structured Chapters</div>
+              <div class="pf-desc">Each chapter flows from insight to strategy, from problem to solution — building a complete picture of your future.</div>
+            </div>
+          </div>
+          <div class="pf-item rv d2">
+            <div class="pf-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#c9a84c" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="9"/><path d="M8 11l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <div class="pf-title">Premium Typography</div>
+              <div class="pf-desc">Set in world-class serif typefaces at professional publishing specifications — 11pt body, 1.6 leading, generous margins.</div>
+            </div>
+          </div>
+          <div class="pf-item rv d3">
+            <div class="pf-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#8ecaff" stroke-width="1.6" stroke-linecap="round"><path d="M11 3v4M3 11h4m10 0h4M11 15v4M5.5 5.5l2.8 2.8m7.4 7.4l2.8 2.8M5.5 16.5l2.8-2.8m7.4-7.4l2.8-2.8"/></svg>
+            </div>
+            <div>
+              <div class="pf-title">Personalised Design</div>
+              <div class="pf-desc">Custom cover design, your name in gold foil, your color palette — a book that announces you before it's even opened.</div>
+            </div>
+          </div>
+          <div class="pf-item rv d4">
+            <div class="pf-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#e8d5a3" stroke-width="1.6" stroke-linecap="round"><path d="M3 17l4-4 4 4 4-4 4 4M3 7l4 4 4-4 4 4 4-4"/></svg>
+            </div>
+            <div>
+              <div class="pf-title">Strategic Frameworks</div>
+              <div class="pf-desc">Embedded diagrams, roadmaps, and visual frameworks that make your strategy tangible and immediately actionable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-r d2" style="display:flex;justify-content:center">
+        <div class="flip-book-wrap">
+          <div style="position:relative">
+            <div class="flip-book">
+              <div class="flip-book-cover">
+                <div class="bc-glow"></div>
+                <div class="bc-lines"></div>
+                <div class="bc-shine"></div>
+                <div class="bc-logo" style="font-size:2rem">LIX</div>
+                <div class="bc-divider"></div>
+                <div class="bc-title">Your Strategy<br>Your Legacy</div>
+                <div class="bc-subtitle" style="margin-top:8px">A Custom Book</div>
+              </div>
+              <div class="flip-page fp1">
+                <div style="padding:24px;font-size:.65rem;color:#5a6a84;font-family:Georgia,serif;line-height:1.7;margin-top:12px">
+                  <div style="font-size:.9rem;font-weight:700;color:#1a2840;margin-bottom:8px;font-family:serif">Chapter One</div>
+                  <div style="font-size:.85rem;color:#3a4a60;margin-bottom:10px;font-style:italic">The Foundation of Your Vision</div>
+                  <p>Every great strategy begins with a clear understanding of where you stand today...</p>
+                </div>
+              </div>
+              <div class="flip-page fp2"></div>
+              <div class="flip-page fp3"></div>
+              <div class="flip-turning"></div>
+            </div>
+            <div class="flip-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SERVICES ════ -->
+<section id="services" style="padding:130px 0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:70px" class="rv">
+      <div class="section-label">Our Packages</div>
+      <h2 class="section-title">Choose your <em>path</em></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center">Four precisely engineered book formats — each designed for a distinct type of thinker.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card rv d1 tilt-card">
+        <div class="svc-spot"></div>
+        <span class="svc-badge sb-blue">Personal</span>
+        <div class="svc-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#5ba3f5" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="13" cy="8" r="4"/>
+            <path d="M5 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+          </svg>
+        </div>
+        <div class="svc-title">Personal Life Strategy Book</div>
+        <div class="svc-desc">A comprehensive blueprint for your personal growth — mapping your values, goals, habits, and the path to your ideal life.</div>
+        <ul class="svc-features">
+          <li>Deep personal audit & analysis</li>
+          <li>5-year life architecture plan</li>
+          <li>Habit systems & daily protocols</li>
+          <li>Relationship & wealth strategy</li>
+          <li>100–150 pages, hardcover</li>
+        </ul>
+        <div class="svc-price">₹24,999</div>
+        <div class="svc-price-note">Includes physical + digital edition</div>
+        <div class="svc-cta">Order Now <span>→</span></div>
+      </div>
+      <div class="svc-card rv d2 tilt-card">
+        <div class="svc-spot"></div>
+        <span class="svc-badge sb-blue">Business</span>
+        <div class="svc-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#5ba3f5" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="8" width="20" height="14" rx="2"/>
+            <path d="M17 8V6a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M13 13v4M10 15h6"/>
+          </svg>
+        </div>
+        <div class="svc-title">Entrepreneur Strategy Book</div>
+        <div class="svc-desc">A founder's complete guide — market positioning, growth models, team building, and the operational playbook for scale.</div>
+        <ul class="svc-features">
+          <li>Business model analysis</li>
+          <li>Market & competitive strategy</li>
+          <li>Revenue & growth frameworks</li>
+          <li>Operations & team playbook</li>
+          <li>120–180 pages, premium finish</li>
+        </ul>
+        <div class="svc-price">₹34,999</div>
+        <div class="svc-price-note">Includes 2 revision rounds</div>
+        <div class="svc-cta">Order Now <span>→</span></div>
+      </div>
+      <div class="svc-card rv d3 tilt-card">
+        <div class="svc-spot"></div>
+        <span class="svc-badge sb-gold">Premium</span>
+        <div class="svc-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round">
+            <path d="M13 3l2.5 5 5.5.8-4 3.9.9 5.5L13 16l-4.9 2.6.9-5.5-4-3.9 5.5-.8L13 3z"/>
+          </svg>
+        </div>
+        <div class="svc-title">Founder Vision Book</div>
+        <div class="svc-desc">A manifesto-grade document capturing your company's origin, philosophy, culture code, and the north star your entire organisation orbits.</div>
+        <ul class="svc-features">
+          <li>Company origin & philosophy</li>
+          <li>Culture & values codex</li>
+          <li>10-year vision architecture</li>
+          <li>Leadership principles</li>
+          <li>160–200 pages, gold foil cover</li>
+        </ul>
+        <div class="svc-price">₹49,999</div>
+        <div class="svc-price-note">Unlimited revisions included</div>
+        <div class="svc-cta">Order Now <span>→</span></div>
+      </div>
+      <div class="svc-card rv d4 tilt-card">
+        <div class="svc-spot"></div>
+        <span class="svc-badge sb-gold">Legacy</span>
+        <div class="svc-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#e8d5a3" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 19V8a2 2 0 012-2h14a2 2 0 012 2v11M4 19h18M4 19l-1 4h20l-1-4"/>
+            <path d="M9 11h8M9 15h5"/>
+          </svg>
+        </div>
+        <div class="svc-title">Legacy Documentation Book</div>
+        <div class="svc-desc">Transform a lifetime of wisdom, stories, and lessons into a heirloom-quality book — your definitive legacy for generations to come.</div>
+        <ul class="svc-features">
+          <li>Life story narrative writing</li>
+          <li>Wisdom & lessons extraction</li>
+          <li>Family & heritage documentation</li>
+          <li>Photo layout & design</li>
+          <li>200+ pages, museum-quality print</li>
+        </ul>
+        <div class="svc-price">₹74,999</div>
+        <div class="svc-price-note">Archival-grade physical edition</div>
+        <div class="svc-cta">Order Now <span>→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STATS ════ -->
+<section id="stats" style="padding:100px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box rv d1">
+        <div class="stat-n"><span data-count="500">0</span><span class="stat-suf">+</span></div>
+        <div class="stat-label">Books Delivered</div>
+      </div>
+      <div class="stat-box rv d2">
+        <div class="stat-n"><span data-count="98">0</span><span class="stat-suf">%</span></div>
+        <div class="stat-label">5-Star Reviews</div>
+      </div>
+      <div class="stat-box rv d3">
+        <div class="stat-n"><span data-count="12">0</span><span class="stat-suf">+</span></div>
+        <div class="stat-label">Countries Served</div>
+      </div>
+      <div class="stat-box rv d4">
+        <div class="stat-n"><span data-count="3">0</span><span class="stat-suf">yrs</span></div>
+        <div class="stat-label">Of Excellence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TESTIMONIALS ════ -->
+<section id="testimonials" style="padding:130px 0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:70px" class="rv">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">Words from those who <em>live</em> their books</h2>
+    </div>
+    <div class="testi-wrap rv d2">
+      <div class="testi-slider" id="testi-slider">
+        <div class="testi-slide">
+          <div class="testi-card">
+            <div class="testi-stars">
+              <span class="testi-star" style="animation-delay:.0s">★</span>
+              <span class="testi-star" style="animation-delay:.1s">★</span>
+              <span class="testi-star" style="animation-delay:.2s">★</span>
+              <span class="testi-star" style="animation-delay:.3s">★</span>
+              <span class="testi-star" style="animation-delay:.4s">★</span>
+            </div>
+            <div class="testi-text">"I've read hundreds of strategy books, but none of them were written about me, for me. My LIX book sits on my desk every morning. It's the clearest thinking I've ever done — and someone else articulated it perfectly."</div>
+            <div class="testi-author">
+              <div class="testi-avatar">AK</div>
+              <div>
+                <div class="testi-name">Arjun Kapoor</div>
+                <div class="testi-role"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-card">
+            <div class="testi-stars">
+              <span class="testi-star" style="animation-delay:.0s">★</span><span class="testi-star" style="animation-delay:.1s">★</span><span class="testi-star" style="animation-delay:.2s">★</span><span class="testi-star" style="animation-delay:.3s">★</span><span class="testi-star" style="animation-delay:.4s">★</span>
+            </div>
+            <div class="testi-text">"The Legacy Documentation Book I received for my father's 70th birthday left the entire family speechless. Forty years of stories, lessons, and wisdom — professionally woven into the most beautiful book I've ever held. Priceless."</div>
+            <div class="testi-author">
+              <div class="testi-avatar">PR</div>
+              <div>
+                <div class="testi-name">Priya Raghavan</div>
+                <div class="testi-role"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-card">
+            <div class="testi-stars">
+              <span class="testi-star" style="animation-delay:.0s">★</span><span class="testi-star" style="animation-delay:.1s">★</span><span class="testi-star" style="animation-delay:.2s">★</span><span class="testi-star" style="animation-delay:.3s">★</span><span class="testi-star" style="animation-delay:.4s">★</span>
+            </div>
+            <div class="testi-text">"My Entrepreneur Strategy Book became the founding document of our company. Every team member received a copy. It aligned 60 people to a single vision in a way that no memo, presentation, or meeting ever could."</div>
+            <div class="testi-author">
+              <div class="testi-avatar">k</div>
+              <div>
+                <div class="testi-name">karthic</div>
+                <div class="testi-role">RK builders</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-card">
+            <div class="testi-stars">
+              <span class="testi-star" style="animation-delay:.0s">★</span><span class="testi-star" style="animation-delay:.1s">★</span><span class="testi-star" style="animation-delay:.2s">★</span><span class="testi-star" style="animation-delay:.3s">★</span><span class="testi-star" style="animation-delay:.4s">★</span>
+            </div>
+            <div class="testi-text">"I spent 30 minutes filling in the intake form. Six weeks later I held a 140-page hardcover that contained more self-awareness than I had accumulated in the previous decade. The process alone changed how I think."</div>
+            <div class="testi-author">
+              <div class="testi-avatar">E</div>
+              <div>
+                <div class="testi-name">
+                  Eswar </div>
+                <div class="testi-role">authicsquare</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-dots" id="testi-dots">
+        <div class="tdot active" data-i="0"></div>
+        <div class="tdot" data-i="1"></div>
+        <div class="tdot" data-i="2"></div>
+        <div class="tdot" data-i="3"></div>
+      </div>
+      <div class="testi-nav">
+        <div class="tnav-btn" id="t-prev">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4L6 9l5 5"/></svg>
+        </div>
+        <div class="tnav-btn" id="t-next">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 4l5 5-5 5"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section id="faq" style="padding:100px 0;background:linear-gradient(180deg,transparent,rgba(8,16,32,.4),transparent)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px" class="rv">
+      <div class="section-label">Common Questions</div>
+      <h2 class="section-title">Everything you need to <em>know</em></h2>
+    </div>
+    <div class="faq-wrap rv d1">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>How long does the entire process take?</span>
+          <div class="faq-q-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">For a Personal Life Strategy Book, the average turnaround is 3–4 weeks from your completed intake form to final delivery. Entrepreneur and Founder books typically take 4–6 weeks. Legacy Documentation books can take 6–8 weeks depending on the volume of content shared.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>How do I submit my information?</span>
+          <div class="faq-q-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">After your order is confirmed, you'll receive our comprehensive intake form via WhatsApp and email. It includes guided questions, free-form text fields, and optionally a voice recording submission option. You can take as long as you need — there is no time pressure on this step.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Will my information remain confidential?</span>
+          <div class="faq-q-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Every engagement begins with a signed Non-Disclosure Agreement. Your information is handled exclusively by our internal team, never outsourced, and securely deleted from our systems after delivery at your request. Your privacy is non-negotiable.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I request revisions?</span>
+          <div class="faq-q-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. All packages include at least two full revision rounds. Founder Vision and Legacy packages include unlimited revisions until you are completely satisfied. We don't consider a book finished until it feels exactly right to you.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you deliver internationally?</span>
+          <div class="faq-q-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg></div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, we ship physical books internationally using premium courier services. All international orders include tracking and insurance. Digital PDF editions are available instantly worldwide at no shipping cost. Additional shipping charges apply for international physical delivery.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section id="contact" style="padding:130px 0">
+  <div class="container">
+    <div style="margin-bottom:70px" class="rv">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Begin your <em>book</em> today</h2>
+      <p class="section-sub">Reach out via WhatsApp, call us directly, or fill in the brief form below. We respond within 24 hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info rv-l">
+        <div class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#5ba3f5" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h8"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Phone</div>
+            <div class="ci-val">+91 97904 67551</div>
+            <div class="ci-note">Mon–Sat, 9am – 7pm IST</div>
+          </div>
+        </div>
+        <div class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#25d366" stroke-width="1.6" stroke-linecap="round"><path d="M17.5 11.8c-.25-.12-1.5-.74-1.73-.82-.23-.08-.4-.12-.57.12-.17.25-.65.82-.8.99-.15.17-.3.19-.55.06-.25-.12-1.07-.39-2.04-1.26-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.01-.39.11-.51.11-.11.25-.29.38-.44.12-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.12-.57-1.37-.78-1.88-.21-.49-.41-.42-.57-.43-.15 0-.32-.01-.49-.01s-.44.06-.67.32c-.23.25-.89.86-.89 2.11s.91 2.45 1.04 2.62c.12.17 1.78 2.72 4.32 3.82.6.26 1.08.42 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.5-.61 1.71-1.2.21-.59.21-1.1.14-1.2-.06-.11-.23-.17-.49-.29z"/><path d="M14 17.5A8.6 8.6 0 0110.1 2C5.65 2 2 5.65 2 10.1c0 1.5.42 2.9 1.14 4.1L2 18l3.96-.9c1.14.63 2.46 1 3.86 1 4.45 0 8.18-3.65 8.18-8.1 0-2.21-.88-4.22-2.3-5.65"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">WhatsApp</div>
+            <div class="ci-val">+91 90949 46746</div>
+            <div class="ci-note">Fastest response — usually within 2 hours</div>
+          </div>
+        </div>
+        <div class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#c9a84c" stroke-width="1.6" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Response Time</div>
+            <div class="ci-val">Within 24 Hours</div>
+            <div class="ci-note">Consultation calls available on request</div>
+          </div>
+        </div>
+        <div class="ci-card">
+          <div class="ci-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#8ecaff" stroke-width="1.6" stroke-linecap="round"><path d="M3 6l7 5 7-5M3 6h14v12H3z"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Service</div>
+            <div class="ci-val">Remote &amp; Global</div>
+            <div class="ci-note">We work with clients worldwide</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-r d2">
+        <form class="lix-form" id="lix-form" onsubmit="submitForm(event)">
+          <div class="lf-group">
+            <input class="lf-input" type="text" id="lf-name" placeholder=" " required autocomplete="name">
+            <label class="lf-label" for="lf-name">Your Full Name</label>
+            <div class="lf-bar"></div>
+          </div>
+          <div class="lf-group">
+            <input class="lf-input" type="tel" id="lf-phone" placeholder=" " required autocomplete="tel">
+            <label class="lf-label" for="lf-phone">Phone Number</label>
+            <div class="lf-bar"></div>
+          </div>
+          <div class="lf-group">
+            <input class="lf-input" type="email" id="lf-email" placeholder=" " autocomplete="email">
+            <label class="lf-label" for="lf-email">Email Address</label>
+            <div class="lf-bar"></div>
+          </div>
+          <div class="lf-group">
+            <select class="lf-input" id="lf-pkg" style="padding-top:16px">
+              <option value="" disabled selected> </option>
+              <option>Personal Life Strategy Book</option>
+              <option>Entrepreneur Strategy Book</option>
+              <option>Founder Vision Book</option>
+              <option>Legacy Documentation Book</option>
+            </select>
+            <label class="lf-label" for="lf-pkg" style="top:9px;font-size:.68rem;color:#5ba3f5;letter-spacing:.1em;text-transform:uppercase">Book Package</label>
+          </div>
+          <div class="lf-group">
+            <textarea class="lf-input" id="lf-msg" placeholder=" " rows="4"></textarea>
+            <label class="lf-label" for="lf-msg">Tell us about yourself & your goals</label>
+            <div class="lf-bar"></div>
+          </div>
+          <button type="submit" class="btn-lix btn-lix-primary" style="width:100%;justify-content:center">
+            <span class="btn-shimmer"></span>
+            <span>Send via WhatsApp</span>
+            <span class="btn-arrow">→</span>
+          </button>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.25);text-align:center;margin-top:12px">Your information is kept strictly confidential under NDA</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section id="cta" style="padding:140px 0;text-align:center;position:relative;overflow:hidden">
+  <div class="cta-bg-pulse"></div>
+  <div class="hero-morphs">
+    <div class="hero-morph hm1" style="opacity:.08"></div>
+    <div class="hero-morph hm2" style="opacity:.06"></div>
+  </div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="rv">
+      <div class="section-label" style="justify-content:center">Your Next Chapter</div>
+      <h2 class="cta-h">
+        The book that will<br>
+        <span style="font-style:italic;font-weight:300;color:var(--ice)">change</span> how you think.
+      </h2>
+      <p class="cta-sub">Start with a 15-minute WhatsApp consultation. No commitment. Just clarity.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-lix btn-lix-cta" onclick="window.open('https://wa.me/919094946746?text=Hi! I want to create my custom strategy book with LIX.','_blank')">
+          <span class="btn-shimmer"></span>
+          Start on WhatsApp
+          <span class="btn-arrow">→</span>
+        </button>
+        <a href="tel:+919790467551" class="btn-lix btn-lix-ghost">
+          Call Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="rv">
+        <div class="footer-brand">LIX <span>Strategy</span></div>
+        <p class="footer-tagline">We transform your experiences, ambitions, and knowledge into a professionally crafted strategy book — designed exclusively for you.</p>
+      </div>
+      <div class="rv d2">
+        <div class="footer-col-title">Navigation</div>
+        <a href="#about" class="footer-link">About</a>
+        <a href="#process" class="footer-link">The Process</a>
+        <a href="#services" class="footer-link">Packages</a>
+        <a href="#contact" class="footer-link">Contact</a>
+      </div>
+      <div class="rv d3">
+        <div class="footer-col-title">Contact</div>
+        <a href="tel:+919790467551" class="footer-link">+91 97904 67551</a>
+        <a href="https://wa.me/919094946746" class="footer-link" target="_blank">WhatsApp: 9094946746</a>
+        <a href="#faq" class="footer-link">FAQ</a>
+        <a href="#cta" class="footer-link">Get Started</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 LIX Strategy Studio. All rights reserved.</div>
+      <div class="footer-copy">Crafted with precision · Every book, unique</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+/* ═══ CURSOR ═══ */
+const lixCursor    = document.getElementById('lix-cursor');
+const lixCursorR   = document.getElementById('lix-cursor-ring');
+const lixCursorG   = document.getElementById('lix-cursor-glow');
+let cx=0,cy=0,crx=0,cry=0;
+document.addEventListener('mousemove', e => {
+  cx = e.clientX; cy = e.clientY;
+  lixCursor.style.left = cx + 'px';
+  lixCursor.style.top  = cy + 'px';
+  lixCursorG.style.left = cx + 'px';
+  lixCursorG.style.top  = cy + 'px';
+});
+(function animRing() {
+  crx += (cx - crx) * 0.1;
+  cry += (cy - cry) * 0.1;
+  lixCursorR.style.left = crx + 'px';
+  lixCursorR.style.top  = cry + 'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.svc-card,.tilt-card,.ci-card,.pf-item,.tnav-btn,.tdot').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+/* ═══ SCROLL PROGRESS ═══ */
+const lixProg = document.getElementById('lix-prog');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  lixProg.style.width = pct + '%';
+}, {passive: true});
+
+/* ═══ BG CANVAS PARTICLES ═══ */
+(function() {
+  const canvas = document.getElementById('lix-bg-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, pts = [];
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive: true});
+  const COLORS = ['rgba(58,123,213,', 'rgba(90,163,245,', 'rgba(201,168,76,', 'rgba(142,202,255,'];
+  function mkPt() {
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+      r: Math.random() * 1.5 + .3,
+      a: Math.random() * .4 + .1,
+      c: COLORS[Math.floor(Math.random() * COLORS.length)],
+      phase: Math.random() * Math.PI * 2
+    };
+  }
+  for (let i = 0; i < 120; i++) pts.push(mkPt());
+  let t = 0;
+  (function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += .008;
+    pts.forEach((p, i) => {
+      const op = p.a * (.6 + .4 * Math.sin(t + p.phase));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.c + op + ')';
+      ctx.fill();
+      // connections
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 110) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = 'rgba(58,123,213,' + ((1 - d/110) * .07) + ')';
+          ctx.lineWidth = .6;
+          ctx.stroke();
+        }
+      }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+      if (p.y < -10) p.y = H + 10;
+      if (p.y > H + 10) p.y = -10;
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+/* ═══ HERO CANVAS PARTICLES ═══ */
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize(); window.addEventListener('resize', resize, {passive:true});
+  class P {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W; this.y = Math.random() * H;
+      this.vx = (Math.random()-.5)*.6; this.vy = -Math.random()*.9-.2;
+      this.r = Math.random()*2+.4; this.a = 0; this.life = 0;
+      this.maxL = Math.random()*160+80;
+      this.c = Math.random() > .7 ? 'rgba(201,168,76,' : 'rgba(90,163,245,';
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy; this.life++;
+      const p = this.life / this.maxL;
+      this.a = p < .2 ? p/.2*.7 : (1-p)*.7;
+      if (this.life > this.maxL) this.reset();
+    }
+    draw() {
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = this.c + this.a + ')'; ctx.fill();
+    }
+  }
+  const pts = [];
+  for (let i = 0; i < 80; i++) { const p = new P(); p.life = Math.random()*p.maxL; pts.push(p); }
+  (function loop() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══ SCROLL REVEAL ═══ */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-sc').forEach(el => revObs.observe(el));
+
+/* ═══ COUNTER ANIMATION ═══ */
+function animCount(el, target, suffix) {
+  let start = null, dur = 2000;
+  function tick(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 4);
+    el.textContent = Math.round(e * target) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-count]').forEach(el => {
+        const tgt = +el.dataset.count;
+        const suf = el.textContent.replace(/\d/g,'').trim().slice(0,3);
+        const inner = el.querySelector('span') || el;
+        const txt = el.textContent;
+        const suffix = txt.replace(/\d+/,'').trim().replace(inner.textContent,'');
+        animCount(inner, tgt, '');
+      });
+      cntObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .4 });
+document.querySelectorAll('.hero-stats,.stats-grid').forEach(el => cntObs.observe(el));
+
+/* ═══ SVG PROCESS LINE DRAW ═══ */
+const procObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.process-line-path').forEach(p => p.classList.add('vis'));
+      procObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .1 });
+document.querySelectorAll('.process-wrap').forEach(el => procObs.observe(el));
+
+/* ═══ 3D BOOK MOUSE TILT ═══ */
+const book3d = document.getElementById('book3d');
+if (book3d) {
+  const scene = book3d.parentElement;
+  scene.addEventListener('mousemove', e => {
+    const r = scene.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width  - .5) * 30;
+    const y = ((e.clientY - r.top)  / r.height - .5) * -20;
+    book3d.style.animation = 'none';
+    book3d.style.transform = `rotateY(${-28 + x}deg) rotateX(${6 + y}deg)`;
+  });
+  scene.addEventListener('mouseleave', () => {
+    book3d.style.animation = 'bookFloat 10s ease-in-out infinite';
+  });
+}
+
+/* ═══ 3D CARD TILT ═══ */
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - .5;
+    const y = (e.clientY - r.top)  / r.height - .5;
+    card.style.transform = `perspective(900px) rotateY(${x*10}deg) rotateX(${-y*8}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform .5s var(--ease)';
+  });
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform .1s ease, box-shadow .4s, border-color .3s';
+  });
+  // Spotlight
+  const spot = card.querySelector('.svc-spot');
+  if (spot) {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      spot.style.left = (e.clientX - r.left) + 'px';
+      spot.style.top  = (e.clientY - r.top)  + 'px';
+    });
+  }
+});
+
+/* ═══ MAGNETIC BUTTONS ═══ */
+document.querySelectorAll('.btn-lix').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width  / 2) * .4;
+    const y = (e.clientY - r.top  - r.height / 2) * .4;
+    if (!btn.classList.contains('btn-lix-cta')) {
+      btn.style.transform = `translate(${x}px,${y - 3}px) scale(1.03)`;
+    }
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  // Ripple effect
+  btn.addEventListener('click', e => {
+    const r = btn.getBoundingClientRect();
+    const rip = document.createElement('span');
+    rip.className = 'btn-ripple';
+    const sz = Math.max(r.width, r.height);
+    rip.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX - r.left - sz/2}px;top:${e.clientY - r.top - sz/2}px`;
+    btn.appendChild(rip);
+    setTimeout(() => rip.remove(), 700);
+  });
+});
+
+/* ═══ TESTIMONIALS ═══ */
+const slider = document.getElementById('testi-slider');
+const dots   = document.querySelectorAll('.tdot');
+let cur = 0, total = 4, autoT;
+function goTo(i) {
+  cur = (i + total) % total;
+  slider.style.transform = `translateX(${-cur * 100}%)`;
+  dots.forEach((d, j) => d.classList.toggle('active', j === cur));
+}
+function startAuto() {
+  clearInterval(autoT);
+  autoT = setInterval(() => goTo(cur + 1), 5500);
+}
+document.getElementById('t-next').addEventListener('click', () => { goTo(cur + 1); startAuto(); });
+document.getElementById('t-prev').addEventListener('click', () => { goTo(cur - 1); startAuto(); });
+dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); }));
+startAuto();
+
+/* ═══ FAQ ACCORDION ═══ */
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ═══ FORM SUBMIT ═══ */
+function submitForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('lf-name').value.trim();
+  const phone = document.getElementById('lf-phone').value.trim();
+  const email = document.getElementById('lf-email').value.trim() || 'Not provided';
+  const pkg   = document.getElementById('lf-pkg').value || 'Not specified';
+  const msg   = document.getElementById('lf-msg').value.trim();
+  const text  = encodeURIComponent(
+    `Hello LIX Strategy Studio! 📖\n\nI would like to create my custom book.\n\n` +
+    `*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Package:* ${pkg}\n\n*My Goals & Vision:*\n${msg}\n\n` +
+    `Looking forward to working with you!`
+  );
+  window.open(`https://wa.me/919094946746?text=${text}`, '_blank', 'noopener');
+}
+
+/* ═══ HERO BUTTON SCROLLS ═══ */
+document.getElementById('btn-start')?.addEventListener('click', () => {
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('btn-learn')?.addEventListener('click', () => {
+  document.getElementById('process').scrollIntoView({behavior:'smooth'});
+});
+
+/* ═══ PARALLAX ═══ */
+let pTick = false;
+window.addEventListener('scroll', () => {
+  if (!pTick) {
+    requestAnimationFrame(() => {
+      const sy = window.scrollY;
+      document.querySelectorAll('.hero-morph').forEach((m, i) => {
+        m.style.transform = `translateY(${sy * (.08 + i*.04)}px) scale(${1 + i*.05})`;
+      });
+      pTick = false;
+    });
+    pTick = true;
+  }
+}, {passive: true});
+
+/* ═══ TXT HIGHLIGHT SWEEP OBSERVER ═══ */
+const hlObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.txt-hl').forEach(el => el.classList.add('vis'));
+    }
+  });
+}, {threshold: .5});
+document.querySelectorAll('section').forEach(s => hlObs.observe(s));
+
+/* ═══ DYNAMIC SHADOW ON SCROLL ═══ */
+const shadowObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const ratio = e.intersectionRatio;
+    if (e.target.classList.contains('svc-card') || e.target.classList.contains('about-card')) {
+      const depth = ratio * 30;
+      e.target.style.setProperty('--shadow-depth', depth + 'px');
+    }
+  });
+}, {threshold: Array.from({length:20}, (_,i) => i/20)});
+document.querySelectorAll('.svc-card,.about-card').forEach(c => shadowObs.observe(c));
+
+/* ═══ AUTO-TYPING CTA EYEBROW ═══ */
+(function() {
+  const texts = ['Personal Strategy Books', 'Founder Vision Books', 'Legacy Documentation', 'Entrepreneur Playbooks'];
+  let ti = 0, ci = 0, del = false;
+  const el = document.querySelector('.hero-eyebrow');
+  if (!el) return;
+  const prefix = '  LIX Strategy Studio';
+  // subtle sub-text typewriter elsewhere
+})();
+
+/* ═══ SCROLL-BASED BLUR FOR HERO ═══ */
+window.addEventListener('scroll', () => {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  const blur = Math.min(window.scrollY / 600 * 8, 8);
+  const opacity = Math.max(1 - window.scrollY / 700, 0);
+  hero.style.setProperty('--hero-blur', blur + 'px');
+  document.querySelector('.hero-content') && (document.querySelector('.hero-content').style.opacity = opacity);
+}, {passive: true});
+
+/* ═══ MICRO BOUNCE ON INTERACTION ═══ */
+document.querySelectorAll('.proc-content,.ci-card,.pf-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    el.style.transition = 'transform .3s var(--spring),border-color .3s,box-shadow .3s';
+  });
+});
+
+/* ═══ ELASTIC BUTTON PRESS ═══ */
+document.querySelectorAll('.btn-lix').forEach(btn => {
+  btn.addEventListener('mousedown', () => {
+    btn.style.transform += ' scale(0.96)';
+  });
+  btn.addEventListener('mouseup', () => {
+    btn.style.transform = btn.style.transform.replace(' scale(0.96)', '');
+  });
+});
+
+/* ═══ ANIMATED GLOWING DOTS NAV ═══ */
+(function() {
+  const sections = ['hero','about','process','book-preview','services','testimonials','contact'];
+  const nav = document.createElement('div');
+  nav.style.cssText = 'position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:4000';
+  sections.forEach(id => {
+    const dot = document.createElement('div');
+    dot.dataset.target = id;
+    dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;';
+    dot.addEventListener('click', () => document.getElementById(id)?.scrollIntoView({behavior:'smooth'}));
+    dot.addEventListener('mouseenter', () => dot.style.transform = 'scale(1.6)');
+    dot.addEventListener('mouseleave', () => dot.style.transform = '');
+    nav.appendChild(dot);
+  });
+  document.body.appendChild(nav);
+  const dotObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const dot = nav.querySelector(`[data-target="${e.target.id}"]`);
+      if (!dot) return;
+      if (e.isIntersecting) {
+        dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:var(--sky);box-shadow:0 0 8px var(--sky);cursor:pointer;transition:all .3s;';
+      } else {
+        dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;';
+      }
+    });
+  }, {threshold:.3});
+  sections.forEach(id => {
+    const s = document.getElementById(id);
+    if (s) dotObs.observe(s);
+  });
+  // hide on mobile
+  if (window.innerWidth < 768) nav.style.display = 'none';
+})();
+
+/* ═══ STAR ANIMATION ═══ */
+document.querySelectorAll('.testi-star').forEach((s, i) => {
+  s.style.animationDelay = (i * .1) + 's';
+});
+
+console.log('%c✦ LIX Strategy Studio — Crafted with Intelligence ✦', 'color:#5ba3f5;font-family:serif;font-size:14px;font-weight:bold;');
+
+</script>
+</body>
+</html>
